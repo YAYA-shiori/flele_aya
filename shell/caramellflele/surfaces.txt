@@ -1,0 +1,118 @@
+
+
+surface0
+{
+0interval,random,3
+0pattern0,-1,10,overlay,0,0
+0pattern1,7,6,overlayfast,0,0
+0pattern3,-1,6,overlay,0,0
+
+}
+
+
+
+surface6
+{
+element0,overlay,surface0000.png,0,0
+element1,overlay,surface0006.png,0,0
+}
+
+surface25
+{
+element0,overlay,surface1000.png,0,0
+
+0interval,always
+0pattern0,1000,12,base,0,0
+0pattern1,1001,12,base,0,0
+0pattern2,1002,12,base,0,0
+0pattern3,1003,12,base,0,0
+0pattern4,1004,12,base,0,0
+0pattern5,1005,12,base,0,0
+0pattern6,1006,12,base,0,0
+0pattern7,1007,12,base,0,0
+
+}
+
+
+surface1000
+{
+collision0,84, 103, 118, 143,k_window
+collision1,125, 175, 162, 215,play_button
+collision2,178, 96, 218, 145,menu
+collision3,83, 275, 148, 299,clear_button
+collision4,111, 80, 181, 166,stop_button1
+}
+
+surface1001
+{
+collision0,87, 85, 116, 128,k_window
+collision1,127, 165, 162, 203,play_button
+collision2,175, 85, 210, 122,menu
+collision3,83, 266, 148, 299,clear_button
+collision4,112, 70, 181, 154,stop_button1
+}
+
+surface1002
+{
+collision0,98, 45, 120, 96,k_window
+collision1,136, 152, 172, 190,play_button
+collision2,180, 50, 215, 105,menu
+collision3,103, 258, 166, 299,clear_button
+collision4,118, 60, 188, 139,stop_button1
+}
+
+surface1003
+{
+collision0,101, 15, 132, 73,k_window
+collision1,144, 140, 182, 175,play_button
+collision2,188, 21, 221, 88,menu
+collision3,118, 258, 180, 299,clear_button
+collision4,120, 40, 198, 121,stop_button1
+}
+
+surface1004
+{
+collision0,92, 93, 127, 139,k_window
+collision1,145, 179, 182, 211,play_button
+collision2,190, 102, 225, 144,menu
+collision3,160, 276, 223, 299,clear_button
+collision4,125, 78, 199, 166,stop_button1
+}
+
+surface1005
+{
+collision0,105, 79, 136, 121,k_window
+collision1,145, 167, 182, 203,play_button
+collision2,189, 89, 225, 132,menu
+collision3,158, 266, 222, 299,clear_button
+collision4,125, 69, 195, 153,stop_button1
+}
+
+surface1006
+{
+collision0,101, 48, 131, 98,k_window
+collision1,138, 151, 176, 188,play_button
+collision2,184, 46, 218, 102,menu
+collision3,144, 267, 206, 299,clear_button
+collision4,121, 58, 193, 138,stop_button1
+}
+
+surface1007
+{
+collision0,101, 24, 131, 83,k_window
+collision1,139, 137, 178, 175,play_button
+collision2,191, 17, 226, 81,menu
+collision3,137, 255, 202, 299,clear_button
+collision4,126, 40, 201, 120,stop_button1
+}
+
+surface0,surface6 {
+
+collision0,91, 199, 128, 262,k_window
+collision1,142, 134, 179, 172,play_button
+collision2,191, 198, 219, 262,menu
+collision3,133, 266, 186, 299,clear_button
+collision4,122, 41, 198, 120,stop_button1
+
+}
+

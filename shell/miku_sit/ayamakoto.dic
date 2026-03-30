@@ -1,0 +1,382 @@
+
+// aya5.dll設定
+#globaldefine AYAINFO_VERSION	0
+#globaldefine AYAINFO_CHARSET	1
+#globaldefine AYAINFO_PATH		2
+
+#define PROTOCOL_VERSION	"2.0"				/* SAORIプロトコルバージョン */
+#define	C_CRLF2		C_CRLF+C_CRLF					/* 改行コードx2   */
+#define	C_CRLF		CHR(0xd)+CHR(0xa)				/* 改行コード     */
+#define	C_BYTE1		CHR(0x1)						/* バイト値1      */
+#define COMPATIBLE_MODE	1							/* 互換モード(タイプ自動変換とかバイト値変換とか) */
+
+
+#globaldefine STATUS_OK							"200 OK"
+#globaldefine STATUS_NO_CONTENT					"204 No Content"
+#globaldefine STATUS_BAD_REQUEST				"400 Bad Request"
+#globaldefine STATUS_INTERNAL_SERVER_ERROR		"500 Internal Server Error"
+
+
+
+/**	AYA API load
+ *	初期化
+ *
+ *	@param	string	_argv[0] ライブラリのディレクトリパス
+ */
+load
+{
+	AYAMAKOTO.PATH      = _argv[0]
+	AYAMAKOTO.VERSION   = PROTOCOL_VERSION
+	AYAMAKOTO.CHARSET   = GetAYACharset()
+
+	//FUNCTIONEX拡張用
+	SAORI.DllList         = IARRAY
+	tempvarname = IARRAY
+	E_CHARSET = GETSETTING('charset.extension')
+
+	OnLoad(AYAMAKOTO.PATH)
+}
+
+/**	AYA API unload
+ *	後始末
+ */
+unload
+{
+	//ユーザ側辞書呼び出し
+	OnUnload();
+	
+	//全てのSAORIをアンロード
+	foreach SAORI.DllList; _saori { UNLOADLIB(_saori) }
+
+	SAORI.DllList = IARRAY
+
+	//全ての変数を削除
+	_varnames=GETVARLIST()
+	foreach _varnames ; _varname {
+		if ASEARCH(_varname,_savevarname) == -1 {
+			ERASEVAR(_varname)
+		}
+	}
+}
+
+
+
+/**	AYA API request
+ *	リクエストヘッダを解析し、指定の関数を呼び出して結果をレスポンスヘッダとして返す
+ *
+ *	@param	string	_argv[0] リクエストヘッダ文字列
+ *	@return	string	レスポンスヘッダ文字列
+ */
+request
+{
+	REQ.HEADER = _argv[0]
+	_header    = SPLIT(_argv[0], C_CRLF)
+
+	// 不正なヘッダ
+	if ARRAYSIZE(_header) <= 1 {
+		AYAMAKOTO.Response(STATUS_BAD_REQUEST)
+		return
+	}
+
+	// リクエストラインの分析
+	_requestLine = _header[0]
+	_header[0]   = IARRAY
+	_requestLine = CUTSPACE(_requestLine)
+
+	if STRSTR(_requestLine, "GET Version", 0) != -1 {
+		AYAMAKOTO.Response(STATUS_OK)
+		return
+	} elseif STRSTR(_requestLine, "MAKOTO", 0) == -1 {
+		AYAMAKOTO.Response(STATUS_BAD_REQUEST)
+		return
+	}
+	REQ.COMMAND  = _requestLine[0, " MAKOTO"]
+	REQ.VERSION  = _requestLine[1, "/"]
+	REQ.PROTOCOL = "MAKOTO/" + REQ.VERSION
+
+	case REQ.COMMAND {
+	when "EXECUTE" {
+		foreach _header; _line {
+			if _line == ""
+				break
+			_field = SPLIT(_line, ":", 2)
+			_key   = CUTSPACE(_field[0])
+			_value = CUTSPACE(_field[1])
+
+			// 変数をセットする。大文字で統一
+			// Charset, SecurityLevel, Sender, Argument[0..n] 以外は無いはず
+			_key = TOUPPER(_key)
+			if _key == "CHARSET" || _key == "SENDER" || _key == "STRING"
+				LETTONAME("REQ.%(_key)", _value)
+		}
+		_res = OnExecute(REQ.STRING)
+		if _res == REQ.STRING {
+			AYAMAKOTO.Response(STATUS_NO_CONTENT)
+		} else {
+			RES.STRING = _res
+			AYAMAKOTO.Response(STATUS_OK)
+		}
+		return
+	}
+	// 未知のリクエスト
+	others
+		AYAMAKOTO.Response(STATUS_BAD_REQUEST)
+		return
+	}
+}
+
+
+/**	レスポンスヘッダを構築する
+ *
+ *	@param	string   _argv[0] ステータス
+ *	@param	string[] _argv[1] Value[0..n]
+ *	@return	string   レスポンスヘッダ文字列
+ */
+AYAMAKOTO.Response
+{
+	_version  = ""
+	_charset  = ""
+	_sender   = ""
+	_status   = ""
+	if ISVAR("RES.VERSION") {
+		_version = RES.VERSION
+		ERASEVAR("RES.VERSION")
+	} else {
+		_version = AYAMAKOTO.VERSION
+	}
+	if ISVAR("RES.CHARSET") {
+		_charset = RES.CHARSET
+		ERASEVAR("RES.CHARSET")
+	} else {
+		_charset = AYAMAKOTO.CHARSET
+	}
+	if ISVAR("RES.STATUS") {
+		_status = RES.STATUS
+		ERASEVAR("RES.STATUS")
+	} else {
+		_status = _argv[0]
+	}
+	_response  = ""
+	_response += "MAKOTO/%(_version) %(_status)" + C_CRLF
+	_response += "Charset: %(_charset)"          + C_CRLF
+	if ISVAR("RES.STRING") {
+		_response += "String: %(RES.STRING)" + C_CRLF
+		ERASEVAR("RES.STRING")
+	}
+	_response + C_CRLF
+}
+
+
+/**	レスポンスヘッダで使用する文字コードを返す
+ *
+ *	@return string 文字コード
+ */
+GetAYACharset
+{
+	case GETSETTING(AYAINFO_CHARSET) {
+	when 0
+		 "Shift_JIS"
+	when 1
+		"UTF-8"
+	when 127
+		"default"
+	others
+		"unknown"
+	}
+}
+
+
+/****************************************************************************************
+ *  文 version 3 システム関数 / システム変数の補完
+ *  FUNCTIONEX / SAORI
+ ****************************************************************************************
+*/
+/*---------------------------------------------------------------------------------------
+ *  関数名：FUNCTIONEX
+ *  機能　：SAORIを実行します
+ *  引数　：_argv[0]　 対象DLL名
+ *  　　　　_argv[1]～ Argument0～
+ * --------------------------------------------------------------------------------------
+*/
+FUNCTIONEX
+{
+	// load　エラーなら抜ける　初回のloadならGET Versionを送出する
+	_r_load = LOADLIB(_argv[0])
+	if !_r_load {
+		0
+		return
+	}
+	if _r_load == 1 {
+		if SUBSTR(SHIORI3FW.SendGETVersion(_argv[0]), 0, 1) != '2' {
+			UNLOADLIB(_argv[0])
+			0
+			return
+		}
+		SAORI.DllList ,= _argv[0]
+	}
+
+	// リクエスト文字列を作成
+	_reqheader = /
+		"EXECUTE SAORI/1.0%(C_CRLF)Charset: %(E_CHARSET)%(C_CRLF)Sender: AYA%(C_CRLF)SecurityLevel: Local%(C_CRLF)"
+	for _i = 1; _i < _argc; _i++ {
+		_reqheader += "Argument%(_i - 1): %(_argv[_i])%(C_CRLF)"
+	}
+	_reqheader += C_CRLF
+
+	// 実行
+	SHIORI3FW.RequestLib(_argv[0], _reqheader)
+
+	if var.lib.result != ''
+		var.lib.result
+	SHIORI3FW.MakeValueexVariable
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SAORI
+ *  機能　：SAORIを実行します
+ *
+ *  FUNCTIONEXのシノニム。一段下駄が入る分FUNCTIONEXより低速になりますが、気にするほどでは
+ *  ありません。
+ * --------------------------------------------------------------------------------------
+*/
+SAORI { FUNCTIONEX(_argv) }
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.SendGETVersion
+ *  機能　：SAORIへGET Versionを送出します
+ *  引数　：_argv[0] SAORIファイル名
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.SendGETVersion
+{
+	SHIORI3FW.RequestLib( _argv[0] , "GET Version SAORI/1.0%(C_CRLF)Charset: %(E_CHARSET)%(C_CRLF)Sender: AYA%(C_CRLF2)")
+
+	LIB.STATUSCODE
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.RequestLib
+ *  機能　：SAORIへリクエストを送出し、結果を得ます
+ *  引数　：_argv[0] SAORIファイル名
+ *  　　　　_argv[1] リクエスト文字列
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.RequestLib
+{
+	LIB.PROTOCOL   = ''
+	LIB.STATUSCODE = ''
+	var.lib.key    = IARRAY
+	var.lib.value  = IARRAY
+
+	// リクエスト送出
+	_result = REQUESTLIB(_argv[0], _argv[1])
+
+	// 結果の解析
+
+	// 改行で分割
+	_lines = RE_SPLIT(_result, C_CRLF)
+
+	// プロトコル名と結果の取得
+	_seppos = STRSTR(_lines[0], ' ', 0)
+	if _seppos == -1; return
+	LIB.PROTOCOL   = SUBSTR(_lines[0], 0, _seppos)
+	LIB.STATUSCODE = SUBSTR(_lines[0], _seppos + 1, STRLEN(_lines[0]) - _seppos - 1)
+
+	// レスポンスヘッダの取得
+	var.lib.key   = IARRAY
+	var.lib.value = IARRAY
+	var.lib.result = ''
+	_skip = 1
+	foreach _lines; _lin {
+		// 1行目は飛ばす
+		if _skip {
+			_skip = 0
+			continue
+		}
+
+		// キーと値を取得
+		_len         = STRLEN(_lin)
+		_pos         = STRSTR(_lin, ': ', 0)
+		var.lib.key ,= (_key = SUBSTR(_lin, 0, _pos))
+		_value       = SUBSTR(_lin, _pos + 2, _len - _pos - 2)
+
+		if COMPATIBLE_MODE {
+			if ISINTSTR(_value)
+				var.lib.value ,= TOINT(_value)
+			elseif ISREALSTR(_value)
+				var.lib.value ,= TOREAL(_value)
+			else
+				var.lib.value ,= REPLACE(_value, C_BYTE1, ',')
+		}
+		else {
+			var.lib.value ,= _value
+		}
+		if _key == 'Result' {
+			if COMPATIBLE_MODE {
+				if ISINTSTR(_value)
+					var.lib.result = TOINT(_value)
+				elseif ISREALSTR(_value)
+					var.lib.result = TOREAL(_value)
+				else
+					var.lib.result = REPLACE(_value, C_BYTE1, ',')
+			} else {
+				var.lib.result = _value
+			}
+		}
+	}
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.MakeValueexVariable
+ *  機能　：リクエストヘッダからvalueex*変数を作成します
+ *  引数　：_argv[0] SAORIファイル名
+ *  　　　　_argv[1] リクエスト文字列
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.MakeValueexVariable
+{
+	SHIORI3FW.ValueexList = IARRAY
+	_sz                   = ARRAYSIZE(var.lib.key)
+	for _i = 0; _i < _sz; _i++ {
+		if SUBSTR(_keyname = var.lib.key[_i], 0, 5) == "Value" {
+			_dmy = LETTONAME(_varname = "valueex%(SUBSTR(_keyname, 5, 3))", var.lib.value[_i])
+			SHIORI3FW.ValueexList ,= _varname
+		}
+	}
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.ClearValueexVariable
+ *  機能　：valueex*変数を削除します
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.ClearValueexVariable
+{
+	foreach SHIORI3FW.ValueexList; _exname { ERASEVAR(_exname) }
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.SaoriUnloadAll
+ *  機能　：ロードされているSAORIをすべてunloadします
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.SaoriUnloadAll
+{
+	foreach SAORI.DllList; _saori { UNLOADLIB(_saori) }
+
+	SAORI.DllList = IARRAY
+}
+
+/*---------------------------------------------------------------------------------------
+ *  関数名：SHIORI3FW.RegisterTempVar
+ *  機能　：終了時に削除するグローバル変数を登録します。
+ * --------------------------------------------------------------------------------------
+*/
+SHIORI3FW.RegisterTempVar
+{
+	for _i = 0 ; _i < _argc ; _i++ {
+		if ASEARCH(_argv[_i],tempvarname) < 0 {
+			tempvarname ,= _argv[_i]
+		}
+	}
+}

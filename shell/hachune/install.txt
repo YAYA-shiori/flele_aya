@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,shell
+name,‚Í‚¿‚ã‚Ë‚³‚ñ
+directory,hachune
+accept,flele

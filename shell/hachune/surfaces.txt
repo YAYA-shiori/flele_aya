@@ -1,0 +1,83 @@
+
+surface0
+{
+//左グローブライト
+0interval,always
+0pattern0,0100,0,overlay,270,189
+0pattern1,0101,30,overlay,270,189
+0pattern2,0102,30,overlay,270,189
+0pattern3,0101,30,overlay,270,189
+0pattern4,0100,30,overlay,270,189
+
+collision0,213, 22, 244, 45,stop_button1
+collision1,276, 25, 322, 69,stop_button2
+collision2,216, 56, 284, 133,play_button
+collision3,149, 105, 225, 158,k_window
+collision4,264, 164, 310, 242,menu
+collision5,214, 246, 284, 311,clear_button
+}
+
+
+
+surface6
+{
+element0,overlay,surface0000.png,0,0
+element1,replace,surface0005.png,0,0
+
+//左グローブライト
+0interval,always
+0pattern0,0100,0,overlay,270,189
+0pattern1,0101,30,overlay,270,189
+0pattern2,0102,30,overlay,270,189
+0pattern3,0101,30,overlay,270,189
+0pattern4,0100,30,overlay,270,189
+
+collision0,213, 22, 244, 45,stop_button1
+collision1,276, 25, 322, 69,stop_button2
+collision2,216, 56, 284, 133,play_button
+collision3,147, 149, 219, 199,k_window
+collision4,264, 164, 310, 242,menu
+collision5,214, 246, 284, 311,clear_button
+}
+
+
+
+
+surface25
+{
+element0,overlay,surface0000.png,0,0
+
+//葱
+0interval,always
+0pattern0,0005,0,replace,0,0
+0pattern1,0004,4,replace,0,0
+0pattern2,0003,4,replace,0,0
+0pattern3,0002,4,replace,0,0
+0pattern4,0001,4,replace,0,0
+0pattern4,-1,1,overlay,0,0
+0pattern4,0001,19,replace,0,0
+0pattern3,0002,4,replace,0,0
+0pattern2,0003,4,replace,0,0
+0pattern1,0004,4,replace,0,0
+0pattern0,0005,4,replace,0,0
+
+
+//左グローブライト
+1interval,always
+1pattern0,0100,0,overlay,270,189
+1pattern1,0101,8,overlay,270,189
+1pattern2,0102,10,overlay,270,189
+1pattern3,0101,8,overlay,270,189
+1pattern4,0100,6,overlay,270,189
+
+collision0,213, 22, 244, 45,stop_button1
+collision1,276, 25, 322, 69,stop_button2
+collision2,216, 56, 284, 133,play_button
+collision3,146, 92, 234, 208,k_window
+collision4,264, 164, 310, 242,menu
+collision5,214, 246, 284, 311,clear_button
+}
+
+
+
+

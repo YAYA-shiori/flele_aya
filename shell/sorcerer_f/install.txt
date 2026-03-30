@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,shell
+name,Sorcerer-F
+directory,sorcerer_f
+accept,flele

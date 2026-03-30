@@ -1,0 +1,4 @@
+charset,Shift_JIS
+type,shell
+name,Miku - small
+directory,miku_s

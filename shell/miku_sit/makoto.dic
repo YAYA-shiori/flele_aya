@@ -1,0 +1,233 @@
+/******************************************************************************
+ お座りMAKOTO 2007/10/27 ver 1.0 by ukiya / powered by "AYA as MAKOTO"
+ ******************************************************************************/
+
+#define FMONAME	"Sakura"
+#define GHOSTNAME	"flele"
+
+/*
+// 利用できるグローバル変数 //////////////////////////
+
+	// AYA変数
+	AYAMAKOTO.PATH:    文の基準ディレクトリパス
+	AYAMAKOTO.VERSION: MAKOTOプロトコルのバージョン
+	AYAMAKOTO.CHARSET: 文の文字セット
+
+	// EXECUTE時のリクエストヘッダの内容
+	REQ.HEADER:   MAKOTOリクエストヘッダ
+	REQ.COMMAND:  コマンド(常にEXECUTE)
+	REQ.VERSION:  MAKOTOプロトコルのバージョン
+	REQ.PROTOCOL: プロトコル名(常にMAKOTO)
+	REQ.STRING:   トランスレートする文字列
+	REQ.CHARSET:  トランスレートする文字列の文字セット
+	REQ.SENDER:   ヘッダの送信者
+*/
+
+
+/**
+ *	お座り。
+ */
+Osuwari{
+	sakurahwnd=GetMyHWND(FMONAME,GHOSTNAME)
+	//お座り
+	if sakurahwnd != '' {
+		_result=FUNCTIONEX('osuwari.dll','START',sakurahwnd,/
+		//追尾対象
+			'ACTIVE',/
+		//位置原点
+			'TR',/
+		//x座標差分
+			'0',/
+		//y座標差分
+			'-128',/
+		//更新間隔
+			'150',/
+		//オプション
+			'XMOVE',/
+		//位置取得失敗時指定
+			'BOTTOM WORKAREA',/
+		//見切れマージン (左 上 右 下)
+			'85 30 63 50'/
+		)
+		
+		//OKを返す
+		'OK'
+		return
+	}
+	
+	'NG'
+	return
+}
+
+
+// OnLoad、OnUnload、OnExecuteの3つの関数は必ず存在する必要がある //////////////
+/**
+ *	ロード時に呼ばれる
+ */
+OnLoad
+{
+	osuwari_status=Osuwari()
+}
+
+
+/**
+ *	アンロード時に呼ばれる
+ */
+OnUnload
+{
+}
+
+/**
+ *	EXECUTEリクエスト時に呼ばれる
+ *
+ *	@param	_argv[0]	置換対象文字列
+ *
+ *	@return	置換後の文字列
+ */
+OnExecute
+{
+	_str   = _argv[0]
+	if osuwari_status == 'NG' {
+		osuwari_status=Osuwari()
+		osuwari_status='OK'//２回以上は試さない
+	}
+	_str
+}
+
+//**************************************
+//	RefreshFMOTable
+//	【呼出】
+//		RefreshTarget
+//	【処理】
+//		SAORIコールによってFMOを取得、グローバル変数に格納
+//		S-V、CROW、SSP一時起動の各FMOは読み込まない
+//		×Hand自身のFMOは読み込まない
+//	【In】
+//		argv0	FMO名（省略時Sakura）
+//		argv1	無視するHWND
+//				省略するとsakurahwndを無視する
+//				自分も含めたい時は - など適当な値をいれておくこと
+//	【Out】
+//		result	FMO上のゴースト数（０＝無しor失敗）
+//	【Global】
+//		out:fmotable
+//		×fmotableの構造は id|hwnd|ghostname（レコードはカンマ区切り）
+//		2007.10.27 fmotable構造変更
+//		id,name,keroname,hwnd,kerohwnd,path,ghostpath の配列
+//**************************************
+RefreshFMOTable
+{
+	_fmoname=_argv[0]
+	if _fmoname == '' {
+		_fmoname='Sakura'
+	}
+	_ignorehwnd=_argv[1]
+	if _ignorehwnd == '' {
+		_ignorehwnd = sakurahwnd
+	}
+	
+	_result=FUNCTIONEX('handutil.dll','GetFMO',_fmoname,/
+	'SSTPVIEWER-','crow_fmo_id','ssp_fmo_header_dummyentry','SSSB')
+	fmotable=''
+
+	if _result==0{
+		'0'
+		return
+	}
+	
+	//結果を擬似２次配列にストア
+	//ssp_fmo_header_000024dc_005c094e.hwnd,6031694
+	//<------------------id----------> key  value
+	fmotable=IARRAY
+
+	_id=''
+	_oldid=''
+	_name=''
+	_keroname=''
+	_hwnd=''
+	_kerohwnd=''
+	_path=''
+	_ghostpath=''
+
+	for _i=0 ; _i<_result ; _i++ {
+		_buf=EVAL("valueex%(_i)")
+		_id=_buf[0,'.']
+		if _oldid == '' {
+			_oldid = _id
+		}
+		//IDが変わったら一時保存を書き出し
+		if _oldid != _id && _hwnd != _ignorehwnd {
+			_oldid = _id
+			_entry="%(_id),%(_name),%(_keroname),%(_hwnd),%(_kerohwnd),%(_path),%(_ghostpath)"
+			fmotable=(fmotable,_entry)
+			_name=''
+			_keroname=''
+			_hwnd=''
+			_kerohwnd=''
+			_path=''
+			_ghostpath=''
+		}
+		_kvpair=_buf[1,'.']
+		_key=_kvpair[0]
+		_val=_kvpair[1]
+		
+		//各値を一時保存
+		case _key {
+		when 'hwnd'		{_hwnd=_val}
+		when 'name'		{_name=_val}
+		when 'keroname'	{_keroname=_val}
+		when 'path'		{_path=_val}
+		when 'kerohwnd'	{_kerohwnd=_val}
+		when 'ghostpath'{_ghostpath=_val}
+		}
+		
+	}
+	//最後のエントリを書き出し
+	if _hwnd != _ignorehwnd {
+		_entry="%(_id),%(_name),%(_keroname),%(_hwnd),%(_kerohwnd),%(_path),%(_ghostpath)"
+		fmotable=(fmotable,_entry)
+	}
+
+	fmotable_count=ARRAYSIZE(fmotable)
+	fmotable_count
+}
+
+//**************************************
+//	GetMyHWND
+//	【呼出】
+//		
+//	【処理】
+//		RefreshFMOTableを使って自分のHWNDを返す
+//	【In】
+//		argv0	FMO名（省略時Sakura）
+//		argv1	SAKURANAME
+//	【Out】
+//		result	''	存在しない
+//		result	hwnd	存在する
+//	【Global】
+//		out:fmotable
+//**************************************
+
+GetMyHWND
+{
+	//自分のHWNDを探す
+	_result=RefreshFMOTable(_argv[0])
+	CVINT(_result)
+	if _result==0{
+		''
+		return
+	}
+	
+	_tablestr=''
+	for _i=0;_i<_result;_i++ {
+		_buf=fmotable[_i]
+		_name=_buf[1]
+		if _argv[1] == _name {
+			_buf[3]
+			return
+		}
+	}
+	
+	''
+	return
+}

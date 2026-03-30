@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,shell
+name,Miku
+directory,miku
+accept,flele
