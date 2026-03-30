@@ -1,3 +1,2 @@
 dic, 0.dic
 dic, 1.dic
-dic, sec.ayc

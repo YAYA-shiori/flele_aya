@@ -1,6 +1,6 @@
 type,balloon
 name,for flele
-homeurl,homeurl,https://raw.githubusercontent.com/YAYA-shiori/flele_aya/main/flele_balloon/
+homeurl,https://raw.githubusercontent.com/YAYA-shiori/flele_aya/main/flele_balloon/
 
 origin.x,14
 origin.y,12
