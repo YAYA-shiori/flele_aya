@@ -1,10 +1,12 @@
-.narignored184d1054c7ba65b7ba76a1cbd8dadfcsize=92charset=UTF-8
-.updateignore4fd630a5d45085d70d8d778a003e4ba1size=107
-delete.txtdd86de4bc4e661146013a39f5c707cf4size=558
+.narignore209c9824f8d76efd8405314c61bfeffesize=123charset=UTF-8
+.updateignoreb450a1f8b3d28b2cf62a5eb6c96d8f21size=138
+delete.txt2c631b038769c4e8bc93f3be7c2c4bb8size=623
 ghost/master/0.dic10706188d8e7ad9d7c73979d114d0c1csize=36119
 ghost/master/1.dicab08c925f67870371919bd18ca5bb18dsize=55309
+ghost/master/aya5.dll7737614f08f642a0261a4f81917ed77asize=198144
+ghost/master/aya5.txt6ba0ed7323358e75162a7e213d661dadsize=22
 ghost/master/dat/tmp.m3ud41d8cd98f00b204e9800998ecf8427esize=0
-ghost/master/descript.txt6f815c5ae9ff3f3433cbfe85099e5b49size=402
+ghost/master/descript.txt53b0ffc0f13ed809f78970897ede79dbsize=402
 ghost/master/img/blbg_help_zukai.png5767bd0dd44f54be94b32b80ae6b17c5size=4922
 ghost/master/img/blbg_help_zukai2.png542b13db823e162eda60bc88d2342ec2size=2325
 ghost/master/img/fle_b.ico4a481c908f76c1bb5461955388f01033size=1406
@@ -34,9 +36,6 @@ ghost/master/saori/mcidonut.dll37c0d098881e9d4693c52235e7bedb48size=51200
 ghost/master/saori/proxy.dll821c3e4dfceee4b83daddab891613994size=81920
 ghost/master/saori/win01.png37b4812e7078e0d64f5e8bfb5973a943size=1048
 ghost/master/saori/wvt.exee8769966f67983c81b71a9865a230d51size=453632
-ghost/master/sec.aycff99665dba1f1fd7eba1c27c6e0f16f0size=1388
-ghost/master/yaya.dll2affe0d3ab4ab7a3f905247c6390a8a7size=884736
-ghost/master/yaya.txt19ee3a3729b4992eae4dd9230bc043e3size=35
 install.txtf5bc97613fd060e45174192dab729e10size=83
 m3u_file/m3u_file.txt522a3760f743b802dcad2551bc1a436esize=25
 readme.txt56c9fde33739165c3125d14984c72546size=3416
