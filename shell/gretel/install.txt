@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,shell
+name,Gretel
+directory,gretel
+accept,flele

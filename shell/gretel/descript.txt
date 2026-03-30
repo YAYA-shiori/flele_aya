@@ -1,0 +1,22 @@
+charset,Shift_JIS
+type,shell
+name,Gretel
+seriko.alignmenttodesktop,free
+sakura.balloon.offsetx,0
+sakura.balloon.offsety,10
+// ÉÅÉjÉÖÅ[
+menu.background.bitmap.filename,menu_background.png
+menu.foreground.bitmap.filename,menu_foreground.png
+menu.sidebar.bitmap.filename,menu_sidebar.png
+menu.background.font.color.r,0
+menu.background.font.color.g,0
+menu.background.font.color.b,0
+menu.foreground.font.color.r,0
+menu.foreground.font.color.g,0
+menu.foreground.font.color.b,0
+menu.disable.font.color.r,130
+menu.disable.font.color.g,122
+menu.disable.font.color.b,99
+menu.separator.color.r,86
+menu.separator.color.g,63
+menu.separator.color.b,66

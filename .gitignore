@@ -1,5 +1,6 @@
-ghost/master/profile
 ghost/master/yaya_variable.cfg
-shell/master/profile
 shell/master/_cache.spx
 /flele_balloon/profile
+**/profile/
+**/_cache.spx
+**/Thumbs.db

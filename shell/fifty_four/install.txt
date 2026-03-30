@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,shell
+name,Fifty-four
+directory,fifty_four
+accept,flele
