@@ -1,0 +1,61 @@
+surface0
+{
+collision0,71, 5, 83, 16,o_stop_button1
+collision1,88, 5, 100, 16,o_k_window
+collision2,54, 5, 66, 16,o_play_button
+collision3,156, 5, 178, 16,o_menu
+collision4,105, 5, 117, 16,o_clear_button
+collision5,122, 5, 134, 16,o_minimize
+collision6,139, 5, 151, 16,o_end_sect
+//blue
+1interval,bind
+1pattern0,0200,0,bind,0,0
+//green
+2interval,bind
+2pattern0,0300,0,bind,0,0
+//pink
+3interval,bind
+3pattern0,0100,0,bind,0,0
+}
+
+surface6
+{
+element0,overlay,surface0000.png,0,0
+collision0,71, 5, 83, 16,o_stop_button1
+collision1,88, 5, 100, 16,o_k_window
+collision2,54, 5, 66, 16,o_play_button
+collision3,156, 5, 178, 16,o_menu
+collision4,105, 5, 117, 16,o_clear_button
+collision5,122, 5, 134, 16,o_minimize
+collision6,139, 5, 151, 16,o_end_sect
+//blue
+1interval,bind
+1pattern0,0200,0,bind,0,0
+//green
+2interval,bind
+2pattern0,0300,0,bind,0,0
+//pink
+3interval,bind
+3pattern0,0100,0,bind,0,0
+}
+
+surface25
+{
+element0,overlay,surface0000.png,0,0
+collision0,71, 5, 83, 16,o_stop_button1
+collision1,88, 5, 100, 16,o_k_window
+collision2,54, 5, 66, 16,o_play_button
+collision3,156, 5, 178, 16,o_menu
+collision4,105, 5, 117, 16,o_clear_button
+collision5,122, 5, 134, 16,o_minimize
+collision6,139, 5, 151, 16,o_end_sect
+//blue
+1interval,bind
+1pattern0,0200,0,bind,0,0
+//green
+2interval,bind
+2pattern0,0300,0,bind,0,0
+//pink
+3interval,bind
+3pattern0,0100,0,bind,0,0
+}

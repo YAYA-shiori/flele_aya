@@ -1,0 +1,71 @@
+
+surface0
+{
+0interval,random,3
+0pattern0,-1,10,overlay,0,0
+0pattern1,0101,3,overlayfast,48,33
+0pattern2,0100,6,overlayfast,48,33
+0pattern3,-1,3,overlay,0,0
+collision0,32, 29, 42, 55,stop_button1
+collision1,94, 29, 104, 54,stop_button2
+collision2,45, 108, 54, 129,k_window
+collision3,59, 89, 75, 105,play_button
+collision4,79, 99, 89, 127,menu
+collision5,57, 159, 77, 171,clear_button
+}
+
+
+surface6
+{
+element0,overlay,surface0000.png,0,0
+element1,overlay,surface0101.png,48,33
+collision0,32, 29, 42, 55,stop_button1
+collision1,94, 29, 104, 54,stop_button2
+collision2,45, 108, 54, 129,k_window
+collision3,59, 89, 75, 105,play_button
+collision4,79, 99, 89, 127,menu
+collision5,57, 159, 77, 171,clear_button
+}
+
+surface25
+{
+element0,overlay,surface0000.png,0,0
+element1,overlay,surface0101.png,48,33
+element2,overlay,surface0121.png,62, 72
+
+0interval,always
+0pattern0,0110,0,overlay,0,0
+0pattern1,0111,90,overlay,0,0
+0pattern2,0112,90,overlay,0,0
+0pattern3,0110,110,overlay,0,0
+
+1interval,always
+1pattern0,-1  ,0 ,overlay,62, 72
+
+1pattern1,0122,24,overlay,62, 72
+1pattern2,-1  ,32,overlay,62, 72
+1pattern3,0122,24,overlay,62, 72
+1pattern4,-1  ,32,overlay,62, 72
+
+1pattern5,0123,24,overlay,62, 72
+1pattern6,-1  ,36,overlay,62, 72
+1pattern7,0122,24,overlay,62, 72
+1pattern8,-1  ,36,overlay,62, 72
+
+1pattern9 ,0122,24,overlay,62, 72
+1pattern10,-1  ,40,overlay,62, 72
+1pattern11,0122,32,overlay,62, 72
+1pattern12,-1  ,32,overlay,62, 72
+
+1pattern13,0123,24,overlay,62, 72
+1pattern14,-1  ,34,overlay,62, 72
+1pattern15,0123,28,overlay,62, 72
+1pattern16,-1  ,40,overlay,62, 72
+
+collision0,32, 29, 42, 55,stop_button1
+collision1,94, 29, 104, 54,stop_button2
+collision2,45, 108, 54, 129,k_window
+collision3,59, 89, 75, 105,play_button
+collision4,79, 99, 89, 127,menu
+collision5,57, 159, 77, 171,clear_button
+}

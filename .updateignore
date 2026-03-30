@@ -1,0 +1,9 @@
+WORK/
+tamac.exe
+CLAUDE.md
+.claude/
+.github/
+.git/
+.gitignore
+ghost/master/yaya_variable.cfg
+flele_balloon/

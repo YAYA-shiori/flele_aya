@@ -1,0 +1,16 @@
+[win01]
+position, lefttop
+skin,win01.png
+font.size, 10
+offset.x, 16
+offset.y, 10
+disparea.left, 27
+disparea.top, 10
+disparea.right, 240
+disparea.bottom, 30
+font.color,666666
+clickerase,off
+dragmove.horizontal,on
+dragmove.vertical,on
+life,0
+

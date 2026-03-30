@@ -1,0 +1,17 @@
+ghost\master\flele.log
+ghost\master\img\blbg_help.png
+ghost\master\saori\txtpaste.dll
+ghost\master\saori\textcopy.dll
+ghost\master\saori\httpc.dll
+ghost\shell\white\descript.txt
+ghost\shell\white\surfaces.txt
+ghost\shell\white\menu_background.png
+ghost\shell\white\menu_foreground.png
+ghost\shell\white\menu_sidebar.png
+ghost\shell\white\surface0000.png
+ghost\shell\white\surface0010.png
+ghost\shell\white\surface0100.png
+ghost\shell\white\surface0101.png
+ghost\shell\white\surface0110.png
+ghost\shell\white\surface0111.png
+ghost\shell\white\surface0112.png

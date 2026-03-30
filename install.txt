@@ -1,0 +1,5 @@
+type,ghost
+name,FLELE
+directory,flele_aya
+balloon.directory,flele_balloon
+refresh,0

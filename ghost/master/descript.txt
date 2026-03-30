@@ -1,0 +1,13 @@
+type,ghost
+name,FLELE
+sakura.name,flele
+kero.name,none
+shiori,yaya.dll
+icon,img\fle_n.ico
+balloon,for flele
+default.balloon.path,flele_balloon
+info.name.reading,‚Ó‚é‚é
+info.sakura.reading,‚Ó‚é‚é
+craftmanurl,https://github.com/YAYA-shiori/flele_aya
+info.distributionurl,https://github.com/YAYA-shiori/flele_aya
+info.narurl,https://github.com/YAYA-shiori/flele_aya/releases/latest/download/flele_aya.nar
