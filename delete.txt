@@ -1,6 +1,6 @@
+ghost/master/aya5.dll
+ghost/master/aya5.txt
 ghost/master/sec.ayc
-ghost/master/yaya.dll
-ghost/master/yaya.txt
 ghost\master\flele.log
 ghost\master\img\blbg_help.png
 ghost\master\saori\httpc.dll
