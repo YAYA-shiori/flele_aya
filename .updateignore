@@ -8,4 +8,5 @@ CLAUDE.md
 ghost/master/yaya_variable.cfg
 ghost/master/aya5_variable.cfg
 flele_balloon/
-/*.nar
+cmd_to_flele.nar
+cmd_flele.nar
