@@ -1,5 +1,6 @@
-.narignore209c9824f8d76efd8405314c61bfeffesize=123charset=UTF-8
-.updateignoreb450a1f8b3d28b2cf62a5eb6c96d8f21size=138
+.narignoree853bc58c16e6c057af56bfe46925d36size=129charset=UTF-8
+.updateignoredaf43d2a82fff498ebe720e82b5a16e3size=144
+README.mde19c17f7c328d9f5054198b9f8c4aafesize=3806
 delete.txt72f9fab685d64f92aa58be982350b1c2size=623
 ghost/master/0.dicb56816f8eeab98f50a3818bf1a02007fsize=4986
 ghost/master/1.diccbc5ae5f5e2c6193a437d50d87d6351csize=65356
@@ -133,7 +134,6 @@ shell/caramellflele/surface1006.png962b597fbd200f5cfab3d6bc8016402bsize=15245
 shell/caramellflele/surface1007.png101da8a0b5f61791753fc390f44d74d4size=16189
 shell/caramellflele/surfaces.txt98528ee033b3ee1e54e4ba130bd4a7cfsize=2442
 shell/fifty_four/descript.txt94a1b13b8882d99bbb2faa0bf958d366size=645
-shell/fifty_four/for54.narb502677b32128126434fe528b6990dd2size=24481
 shell/fifty_four/install.txt2e741f3aa2544a0e931ed312a7be21a8size=78
 shell/fifty_four/makoto.dll7dbf59857e11e24878c82c4ce30978b5size=65536
 shell/fifty_four/makoto0.lst1212e8e5330b1fac2eddd5ae4e3ab6a8size=173
@@ -598,3 +598,4 @@ shell/sorcerer_f/surfaces.txtc591748e6928ddd3681118a3259897f1size=7677
 shell/sorcerer_f/thumbnail.pnr5bdb0ae91b412b1369173918c11d040bsize=4835
 sound_file/sound_file.txtd25f353f6d0af90c28a251cad474b023size=54
 thanks.txt4f007b625f5a9f9e1cdfc6c105ed046esize=380
+thumbnail.png3634e2667d791999691675ba55038a5dsize=4924
