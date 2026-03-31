@@ -56,13 +56,16 @@ jobs:
         run: python release_ghost.py dau
 
       - name: Generate updates2.dau for balloon
-        run: python release_ghost.py dau flele_balloon/
+        run: python release_ghost.py --root flele_balloon/ dau
+
+      - name: Generate updates2.dau for balloon2
+        run: python release_ghost.py --root flele_balloon2/ dau
 
       # updates2.dau / delete.txt に変更があるか確認し、後続ステップに伝える
       - name: Check for changes
         id: check
         run: |
-          git add updates2.dau delete.txt flele_balloon/updates2.dau
+          git add updates2.dau delete.txt flele_balloon/updates2.dau flele_balloon2/updates2.dau
           if git diff --cached --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "変更なし。リリースをスキップします。"
@@ -88,6 +91,11 @@ jobs:
         if: steps.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
         run: python release_ghost.py nar
 
+      # flele_balloon2.nar を生成
+      - name: Create flele_balloon2.nar
+        if: steps.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+        run: python release_ghost.py --root flele_balloon2/ nar --output flele_balloon2.nar
+
       # リリースタグを決定（日時 + コミットSHA短縮形）
       - name: Set release tag
         if: steps.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
@@ -109,7 +117,8 @@ jobs:
           gh release create "${{ steps.tag.outputs.tag }}" \
             --title "${{ steps.tag.outputs.title }}" \
             --generate-notes \
-            flele_aya.nar
+            flele_aya.nar \
+            flele_balloon2.nar
 
       # 最新リリース1件のみ残し、古いリリースとタグを自動削除
       - name: Delete old releases

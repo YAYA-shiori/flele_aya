@@ -34,6 +34,10 @@
 
 元のサイトで別配布となっていたシェルはすべて同梱しています。
 
+## 追加バルーン
+
+- [文字大き目バルーン](https://github.com/YAYA-shiori/flele_aya/releases/latest/download/flele_balloon2.nar)
+
 ## おまけ
 
 ゴースト[caramelldansen](http://haka.sakura.ne.jp/pants/)用追加キャラサプリ [cmd_flele.nar](https://raw.githubusercontent.com/YAYA-shiori/flele_aya/master/cmd_flele.nar)

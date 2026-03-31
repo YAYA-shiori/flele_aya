@@ -7,5 +7,6 @@ CLAUDE.md
 .gitignore
 ghost/master/yaya_variable.cfg
 ghost/master/aya5_variable.cfg
+flele_balloon2/
 cmd_to_flele.nar
 cmd_flele.nar
