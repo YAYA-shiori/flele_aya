@@ -1,11 +1,13 @@
-.narignore630f3c9c5c171bcb4a7b7164cbaf4462size=154charset=UTF-8
-.updateignoref68581b8fc4977b91e77fb9714aecb7esize=169
-README.md387f3191ff2d6a6d51064742e2ce24bbsize=3444
+.narignore6d452979b9e6c1eb9bb391d0048927cfsize=170charset=UTF-8
+.updateignore8b12c27ab15dc43e10f5419d8df4e934size=185
+README.md356d296dee461ca0dff1c18b94f986bcsize=3586
 delete.txt72f9fab685d64f92aa58be982350b1c2size=623
 ghost/master/0.dicb56816f8eeab98f50a3818bf1a02007fsize=4986
 ghost/master/1.diccbc5ae5f5e2c6193a437d50d87d6351csize=65356
 ghost/master/dat/tmp.m3ud41d8cd98f00b204e9800998ecf8427esize=0
 ghost/master/descript.txt6f815c5ae9ff3f3433cbfe85099e5b49size=402
+ghost/master/flele_thumbnail/readme.txta936920570c54a6cfe167a4942cad20csize=392
+ghost/master/flele_thumbnail/thumbnail.psdca13eafb8ddf015e79c598782ae89498size=34878
 ghost/master/img/blbg_help_zukai.png5767bd0dd44f54be94b32b80ae6b17c5size=4922
 ghost/master/img/blbg_help_zukai2.png542b13db823e162eda60bc88d2342ec2size=2325
 ghost/master/img/fle_b.ico4a481c908f76c1bb5461955388f01033size=1406
@@ -45,7 +47,8 @@ ghost/master/yaya.dll49c59cfbf704b64705c9d3d2a7150251size=884736
 ghost/master/yaya.txt433aeb761b832e7395648a649124fb17size=309
 install.txtf5bc97613fd060e45174192dab729e10size=83
 m3u_file/m3u_file.txt522a3760f743b802dcad2551bc1a436esize=25
-readme.txt56c9fde33739165c3125d14984c72546size=3416
+readme.txt40cb5a6437ec72108e544b19b16354acsize=4607
+readme2.txtf0dac888133922c2dbe8d86031872f24size=3508
 shell/ayame/descript.txta51c4b38014ada20526f43948b4bb386size=641
 shell/ayame/install.txta6a4ecb61a4a18de6e9f35db574f5cd4size=68
 shell/ayame/menu_background.png79e1eec8474db01bc0b3999b5d1f1d42size=251
@@ -598,5 +601,5 @@ shell/sorcerer_f/surface1131.pngc8fb792e01592bc95a4e85ca708f6962size=1065
 shell/sorcerer_f/surfaces.txtc591748e6928ddd3681118a3259897f1size=7677
 shell/sorcerer_f/thumbnail.pnr5bdb0ae91b412b1369173918c11d040bsize=4835
 sound_file/sound_file.txtd25f353f6d0af90c28a251cad474b023size=54
-thanks.txt4f007b625f5a9f9e1cdfc6c105ed046esize=380
+thanks.txt9a31c35f58ced84030e074801483b1ffsize=410
 thumbnail.png3634e2667d791999691675ba55038a5dsize=4924
