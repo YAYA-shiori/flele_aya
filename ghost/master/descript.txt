@@ -2,7 +2,7 @@ type,ghost
 name,FLELE
 sakura.name,flele
 kero.name,none
-shiori,aya5.dll
+shiori,yaya.dll
 icon,img\fle_n.ico
 balloon,for flele
 default.balloon.path,flele_balloon

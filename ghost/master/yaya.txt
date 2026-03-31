@@ -1,0 +1,15 @@
+charset.setting, UTF-8
+
+charset.dic, UTF-8
+charset.output, UTF-8
+charset.file, UTF-8
+charset.save, UTF-8
+charset.save.old, Shift_JIS
+charset.extension, Shift_JIS
+
+dicdir, system
+dic, 0.dic
+dic, 1.dic
+
+ignoreiolog, ID: OnSecondChange //OnSecondChange無視
+iolog.filter.keyword, ID: OnMouse //OnMouse系無視
