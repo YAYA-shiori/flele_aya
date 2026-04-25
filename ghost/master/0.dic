@@ -16,7 +16,7 @@ OnAnchorSelect {EVAL(reference0)}
 On_useorigin1 {"0"}
 
 
-On_hwnd{○hwnd=reference0[0]}
+On_hwnd{○hwnd=SPLIT(reference0,CHR(1))[0]}
 On_uniqueid{○uniqueid=reference0}
 
 

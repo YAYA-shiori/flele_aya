@@ -1672,7 +1672,7 @@ OnFileDrop2 {
 	else {
 	○ディレクトリ = 0
 	//　簡易配列を汎用配列へ変換
-	○AllFilepath = SPLIT (○path, ",")
+	○AllFilepath = SPLIT (○path, CHR(1))
 	○path = (○AllFilepath[0])
 	_拡張子 = TOLOWER ((SPLITPATH (○path))[3])
 		// m3uを投げられた
@@ -2126,7 +2126,8 @@ OnSNTPCompare {
 }
 
 OnSNTPCorrect {
-_時刻=reference1[0]+'/'+reference1[1]+'/'+reference1[2]+' '+reference1[3]+':'+reference1[4]+':'+reference1[5]
+_t = SPLIT(reference1,',')
+_時刻=_t[0]+'/'+_t[1]+'/'+_t[2]+' '+_t[3]+':'+_t[4]+':'+_t[5]
 
 "\0\s[0]/
 \_q\n[half]/
