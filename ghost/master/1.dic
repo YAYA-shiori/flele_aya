@@ -578,23 +578,24 @@ i=○path
 }
 
 □曲情報中身 {
-
-	if (FATTRIB(○演奏中曲パス2)) == -1 {
+	_path = 絶対パス変換(○path)
+	if (FATTRIB(_path)) == -1 {
 "%(fcl)* ファイルが存在しません *%(def)\n/
 %(fcl)Number　 %(def): %(○No)　( Total %(○曲の数) )\n/
 %(fcl)Filepath %(def): \_!%(○path)\_!\n/
 "
 	}
 	else {
+		_m = □メディア情報(_path)
 "/
 %(fcl)number　 %(def): %(○No)　( Total %(○曲の数) )\n/
-%(fcl)track 　 %(def): %(曲解析('GetTrack')) \n/
-%(fcl)artist 　%(def): %(曲解析('GetArtist')) \n/
-%(fcl)genre 　 %(def): %(ジャンル番号解析)\n/
-%(fcl)year 　　%(def): %(曲解析('GetYear'))\n/
-%(fcl)filepath %(def): \_!%(絶対パス変換(○path))\_!\n/
+%(fcl)title　　%(def): \_!%(_m[0])\_!\n/
+%(fcl)artist 　%(def): \_!%(_m[1])\_!\n/
+%(fcl)genre 　 %(def): \_!%(_m[3])\_!\n/
+%(fcl)year 　　%(def): \_!%(_m[4])\_!\n/
+%(fcl)filepath %(def): \_!%(_path)\_!\n/
 %(fcl)filesize %(def): %(○現在曲サイズ)\n/
-%(fcl)comment　%(def): %(曲解析('GetComment'))\n/
+%(fcl)comment　%(def): \_!%(_m[6])\_!\n/
 "
 	}
 }
@@ -1693,14 +1694,11 @@ if _no < 1 {
 ○起動中演奏回++
 // ファイル名を曲名にする
 ○演奏中曲名 = "%((SPLITPATH (○演奏中曲パス))[2])%((SPLITPATH (○演奏中曲パス))[3])"
-if ○演奏曲拡張子 == ".mp3"
-{
-
-	_トラック = SAORI("saori\KI.dll","ExtractMP3","%(○演奏中曲絶対パス)","GetTrack")
-
-	// トラック取得成功したら曲名にする
-	if "id3%(CHR(0x20))tag%(CHR(0x28))v1%(CHR(0x29))%(CHR(0x20))is%(CHR(0x20))not%(CHR(0x20))found" !_in_ _トラック && "204%(CHR(0x20))No%(CHR(0x20))Content" !_in_ _トラック && "Not%(CHR(0x20))Found" !_in_ _トラック { ○演奏中曲名 = _トラック }
-}
+// タグに曲名があれば曲名にする（取れなければファイル名のまま）
+_m = □メディア情報(○演奏中曲絶対パス)
+if _m[0] != '' {
+	○演奏中曲名 = REPLACE(REPLACE(REPLACE(_m[0],"[","［"),"]","］"),"\","￥")
+	}
 //曲名ウィンドウ表示してたら曲名更新
 void □曲名ウィンドウONなら表示
 
@@ -2350,11 +2348,10 @@ FUNCTIONEX("saori\proxy.dll","wvt.exe","OpenDialog")
 
 ○曲の数 { TOINT((ARRAYSIZE(○曲リスト))) }
 ○演奏中曲絶対パス {絶対パス変換(○演奏中曲パス)}
-○演奏曲拡張子 {TOLOWER ((SPLITPATH (○演奏中曲パス))[3])}
 ○曲名文字数 {STRLEN (○演奏中曲名)}
 
 ○現在曲サイズ {
-_i = FSIZE(○path)
+_i = FSIZE(絶対パス変換(○path))
 
 if _i == -1 {"　"}
 elseif _i>=1000000000 {
@@ -2381,30 +2378,22 @@ if "..\..\..\sound_file\" _in_ _argv[0] {
 else {_argv[0]}
 }
 
-//ExtractMP3全般
-曲解析 {
-_i = SAORI("saori\KI.dll","ExtractMP3",○path,_argv[0])
-if (ASEARCH(_i,'id3 tag(v1) is not found','Target Not Found','204 No Content','arg0 is error','arg1 is error','arg2 is error')) != -1 {_i=''}
-_i = REPLACE(_i,"[","［")
-_i = REPLACE(_i,"]","］")
-_i = REPLACE(_i,"\","￥")
-_i
-}
-
-ジャンル番号解析 {
-_i = SAORI("saori\KI.dll","ExtractMP3",○path,"GetGenre")
-if _i==255 {""}
-elseif _i>=0 && _i<=147 {
-	ジャンル番号[(_i)]
+//曲ファイルのタグをSSP本体（SAORI over DirectSSTP の internal_file / MediaInfo）で読む
+//再生していない曲でも、ファイルをロードせずに読める
+//返値：(title, artist, album, genre, year, duration, comment) の配列。取れなかった値は空
+□メディア情報 {
+_v = ('','','','','','','')
+//使えない（旧SSP、SSP以外）ときは LIB.STATUSCODE が変わらないので、先に空にしておく
+LIB.STATUSCODE = ''
+void FUNCTIONEX('internal_file','MediaInfo',_argv[0],'title','artist','album','genre','year','duration','comment')
+//ファイルが無いなどの失敗（400/500）や使えないときは空のまま
+if STRSTR(LIB.STATUSCODE,'200',0) == 0 {
+	for _i = 0 ; _i < 7 ; _i++ {
+		//値の中の改行は 0x01 になって届く
+		_v[_i] = REPLACE(TOSTR(valueex[_i]), CHR(1), ' ')
+		}
 	}
-elseif _i==248 {'Heavy Rock'}
-elseif _i==249 {'Doom Rock'}
-elseif _i==250 {'J-POP'}
-elseif _i==251 {'Seiyu'}
-elseif _i==252 {'Tecno Ambient'}
-elseif _i==253 {'Moemoe'}
-elseif _i==254 {'Tokusatsu'}
-else {''}
+_v
 }
 
 

@@ -5,8 +5,6 @@ FLELEは以下のdllで成り立っています。
 http://umeici.hp.infoseek.co.jp/
 □ hotkey.dll
 http://www5d.biglobe.ne.jp/~satis/
-□ KI.dll
-http://www.psn.ne.jp/~nagayama/
 □ Weirds.dll
 http://www.boreas.dti.ne.jp/~sdn/
 □ wvt.exe
