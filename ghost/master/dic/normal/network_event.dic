@@ -33,7 +33,7 @@ OnSNTPCorrect
 
 	"\0\s[0]/
 		\_q\n[half]/
-		%(fcl)%(_時刻)%(def)\n/
+		%(fcl)%(_時刻)\f[color,default]\n/
 		\n[half]/
 		\_q時刻を合わせました。\w9\w9\w9\w9%(○サーフェス)\e"
 }
@@ -105,7 +105,7 @@ OnHeadlinesense.OnFind
 	"\![set,autoscroll,disable]\*\_q"
 	--
 	//タイトル//
-	"%(fcl)”%(reference[0])”%(def)\n[half]\n"
+	"%(fcl)”%(reference[0])”\f[color,default]\n[half]\n"
 	--
 	//本文//
 	_本文 = reference[3]
@@ -170,7 +170,7 @@ OnRSSComplete
 		_表示件数 = 11
 	}
 
-	"%(fcl)”\q[%(reference[0]),%(reference[1])]”%(def) 最新%(_表示件数)件\n[half]\n"
+	"%(fcl)”\q[%(reference[0]),%(reference[1])]”\f[color,default] 最新%(_表示件数)件\n[half]\n"
 	--
 	//本文//
 	_i = 1
@@ -237,7 +237,7 @@ OnInstallComplete
 		others ; reference[0]
 	}
 	--
-	" %(fcl)”%(reference[1])”%(def)"
+	" %(fcl)”%(reference[1])”\f[color,default]"
 	--
 	if reference[0] == "shell" {
 		"\w9\w9\w9\w9\w9\w9\![change,shell,%(reference[1])]"
@@ -277,12 +277,12 @@ OnNarCreating
 
 OnUpdatedataCreated
 {
-	"\0%(○サーフェス)\s[0]%(fcl)”updates2.dau”%(def)を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
+	"\0%(○サーフェス)\s[0]%(fcl)”updates2.dau”\f[color,default]を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
 }
 
 OnNarCreated
 {
-	"\0%(○サーフェス)\s[0]%(reference[2])%(fcl)”%(reference[0])”%(def)を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
+	"\0%(○サーフェス)\s[0]%(reference[2])%(fcl)”%(reference[0])”\f[color,default]を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
 }
 
 //******************************************************************************
@@ -301,7 +301,7 @@ OnUpdateReady
 {
 	_file = TOINT(reference[0]) + 1
 
-	"\0\s[0]%(fcl)”%(_file)”%(def) update file"
+	"\0\s[0]%(fcl)”%(_file)”\f[color,default] update file"
 	--
 	if _file > 1 {
 		"s"
@@ -315,7 +315,7 @@ OnUpdateReady
 //------------------------------------------------------------------------------
 OnUpdate.OnDownloadBegin
 {
-	"\0\s[6]\_qloading %(fcl)”%(reference[0])”%(def)\_q\e"
+	"\0\s[6]\_qloading %(fcl)”%(reference[0])”\f[color,default]\_q\e"
 }
 
 //------------------------------------------------------------------------------

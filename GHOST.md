@@ -25,25 +25,17 @@
 
 | ファイル（`ghost/master/dic/normal/`） | 主な中身 |
 |---|---|
-| `core.dic` | 選択肢・アンカーの選択（`OnChoiceSelect`）、ウィンドウ情報、ゴースト間通信（`OnCommunicate`） |
+| `core.dic` | 選択肢・アンカーの選択（`OnChoiceSelect`）、ウィンドウ情報、ゴースト間通信（`OnCommunicate`）、SSP が問い合わせるリソース（ボタンの文字、リンク、`On_homeurl`） |
 | `boot_end.dic` | 初回起動、起動時の変数初期化（`□起動`）、終了時の後始末（`□終了前`） |
-| `shell_balloon.dic` | シェル・バルーン・着せ替え・最小化・サーフェスの変化、`OnTranslate`、タスクトレイのアイコン |
-| `theme.dic` | シェル別の文字色、アイコン、メニュー背景（`fcl` `def` `mffc` `mfbc` `menu_bg` など） |
-| `mouse.dic` | クリック・ダブルクリックでのボタン操作、なでの反応、The Hand |
-| `hotkey.dic` | キー入力とホットキー（`hotkey.dll`） |
+| `shell_balloon.dic` | シェル・バルーン・着せ替え・最小化・サーフェスの変化、`OnTranslate`、タスクトレイのアイコン、シェル別の文字色・メニュー背景（`fcl` `fcc` `mffc` `mfbc` `menu_bg` など）。アイコンの `\_b[img\icon_名前.png,inline]` と、文字色を戻す `\f[color,default]` は関数にせず直接書く |
+| `input.dic` | クリック・ダブルクリックでのボタン操作、なでの反応、The Hand、キー入力とホットキー（`hotkey.dll`） |
 | `keyconfig.dic` | ショートカットキーを変えるメニュー |
-| `menu.dic` | ヘルプメニューのトップ画面、演奏中の曲情報 |
-| `menu_settings.dic` | 設定画面（動作設定・再生方法） |
-| `song_add.dic` | 曲の手動追加（ダイアログ・パス入力）、`OnUserInput` |
-| `file_drop.dic` | ファイル・フォルダ・m3u のドロップと曲リストへの追加 |
-| `download.dic` | URL からの曲のダウンロード |
-| `m3u_export.dic` | 曲リストの m3u 出力 |
-| `song_window.dic` | 曲名ウィンドウ（`bln.dll`） |
-| `weirds.dic` | 曲リストメニュー（`Weirds.dll`） |
+| `menu.dic` | ヘルプメニューのトップ画面、演奏中の曲情報、設定画面（動作設定・再生方法） |
+| `song_add.dic` | 曲の手動追加（ダイアログ・パス入力）、`OnUserInput`、ファイル・フォルダ・m3u のドロップ、URL からの曲のダウンロード |
+| `weirds.dic` | 曲リストメニュー（`Weirds.dll`）、曲名ウィンドウ（`bln.dll`） |
 | `player.dic` | 演奏（再生・一時停止・停止・次の曲の選び方・再生エラー） |
-| `songlist.dic` | 曲リストの管理（曲数、絶対パス、タグ、クリア、ダウンロード曲の削除待ち） |
+| `songlist.dic` | 曲リストの管理（曲数、絶対パス、タグ、クリア、ダウンロード曲の削除待ち）、曲リストの m3u 出力 |
 | `network_event.dic` | 時刻合わせ・メール・ヘッドライン・RSS・インストール・ネットワーク更新のイベント |
-| `resource.dic` | SSP が問い合わせるリソース（ボタンの文字、リンク、`On_homeurl`） |
 
 ## 書き方の決まり
 
