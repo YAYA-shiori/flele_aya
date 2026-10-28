@@ -69,6 +69,24 @@ def _is_ignored(rel_str: str, patterns: list[str]) -> bool:
 
 # ── ファイル列挙 ─────────────────────────────────────────────────────────────
 
+def git_ls_files(root: Path) -> list[str]:
+    """git で管理されているファイルと未追跡のファイルの一覧を返す（.gitignore は尊重する）。
+
+    サブモジュール（ghost/master/dic/system）の中のファイルも含める。
+    `--recurse-submodules` は `--others` と併用できないので、2 回に分けて呼ぶ。
+    """
+    tracked = subprocess.run(
+        ['git', 'ls-files', '--cached', '--recurse-submodules'],
+        cwd=root, capture_output=True, text=True, check=True,
+    )
+    untracked = subprocess.run(
+        ['git', 'ls-files', '--others', '--exclude-standard'],
+        cwd=root, capture_output=True, text=True, check=True,
+    )
+    paths = tracked.stdout.splitlines() + untracked.stdout.splitlines()
+    return sorted({p.strip().replace('\\', '/') for p in paths if p.strip()})
+
+
 def collect_files(root: Path, ignore_patterns: list[str]) -> list[tuple[str, Path]]:
     """ゴースト配布対象ファイルの一覧を返す。
 
@@ -79,14 +97,7 @@ def collect_files(root: Path, ignore_patterns: list[str]) -> list[tuple[str, Pat
         [(フォワードスラッシュ区切り相対パス, 絶対パス), ...] のソート済みリスト
     """
     try:
-        result = subprocess.run(
-            ['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
-            cwd=root,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        raw_paths = [p.strip() for p in result.stdout.splitlines() if p.strip()]
+        raw_paths = git_ls_files(root)
     except (subprocess.CalledProcessError, FileNotFoundError):
         raw_paths = [
             '/'.join(p.relative_to(root).parts)
@@ -166,11 +177,7 @@ def cmd_delete(root: Path, output: Path, prev_ref: str | None) -> None:
                 accumulated.add(line)
 
     # 現在のファイル一覧（除外判定に使用）
-    curr_result = subprocess.run(
-        ['git', 'ls-files', '--cached', '--others', '--exclude-standard'],
-        cwd=root, capture_output=True, text=True, check=True,
-    )
-    curr_files = {r.replace('\\', '/') for r in curr_result.stdout.splitlines()}
+    curr_files = set(git_ls_files(root))
 
     # 前リリースから今回削除されたファイルを取得
     newly_deleted: set[str] = set()
