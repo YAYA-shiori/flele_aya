@@ -13,3 +13,5 @@ craftmanw,FLELE原作+YAYA開発PJ
 craftmanurl,https://github.com/YAYA-shiori/flele_aya
 info.distributionurl,https://github.com/YAYA-shiori/flele_aya
 info.narurl,https://github.com/YAYA-shiori/flele_aya/releases/latest/download/flele_aya.nar
+readme,README.md
+readme.charset,UTF-8

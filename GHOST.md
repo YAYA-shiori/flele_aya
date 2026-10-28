@@ -12,7 +12,7 @@
 
 ## ライセンス・著作
 
-- 辞書など原作の部分は、原作の再配布・改変配布許可に従う（`readme.txt`、`readme2.txt`、`thanks.txt` 参照）。
+- 辞書など原作の部分は、原作の再配布・改変配布許可に従う（`README.md`、`thanks.txt` 参照）。
 - `shell/` の追加シェルは、それぞれの作者の作品。シェルごとの `readme.txt` / `install.txt` に従い、画像は編集しない。
 - `ghost/master/dic/system/` は yaya-dic（サブモジュール）。
 
