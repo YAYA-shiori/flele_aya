@@ -1,7 +1,7 @@
 FLELEは以下のdllで成り立っています。
 作者の方々に感謝。
 
-□ aya5.dll / bln.dll / mciaudior.dll
+□ aya5.dll / bln.dll
 http://umeici.hp.infoseek.co.jp/
 □ hotkey.dll
 http://www5d.biglobe.ne.jp/~satis/
@@ -13,5 +13,4 @@ http://www.boreas.dti.ne.jp/~sdn/
 http://vistar.hp.infoseek.co.jp/
 □ proxy.dll
 http://homepage3.nifty.com/khsoft/cbs/
-□ mcidonut.dll
 

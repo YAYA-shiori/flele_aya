@@ -8,23 +8,11 @@ ghostフォルダ内にあるflele_ayaというフォルダをコピーすれば
 複数のFLELEを同時起動すると音楽再生ができなくなってしまうかもしれません。
 
 
-□ FLELEの使用しているmciaudior.dllで再生できないファイル
+□ 再生できないファイル
 
-過去に報告されたものは以下。
-
-OS NT系 … wma（過去のmciaudior.dllでは再生できるらしい）
-OS 9x系 … mp3
-
-mp3はffdshow最新版をインストールで直るという報告もあり。
-http://cowscorpion.com/dl/ffdshow.html
-
-自作SAORI等でなんとかしようと思いつつ難航中。
-SSPのサウンド再生タグは一時停止等の仕様がFLELEに不向き。
-どなたかSAORI作って頂けるとよろこびますとっても。
-
-□ 音楽再生テスト用ゴースト
-http://navy.nm.land.to/ukgk/flele/dat/mciaudior_test.nar
-これで再生できなかったら私の力では対処できません。
+FLELEは音楽の再生をSSP本体に任せています。
+再生できないファイルは、SSPのエラーログに出る案内（コーデックの追加など）を参考にしてください。
+連続再生中に再生できない曲があった場合は、その曲を飛ばして次の曲を演奏します。
 
 □ 音楽ファイルダウンロード
 > 同じファイル名の曲が既にある場合は上書き
@@ -54,7 +42,7 @@ http://navy.nm.land.to/ukgk/flele/dat/mciaudior_test.nar
 
 
 □ 音量調節
-使用しているdllの仕様上できません。
+今のところ対応していません。
 
 
 □ シェル
