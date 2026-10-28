@@ -2,6 +2,16 @@ ghost/master/0.dic
 ghost/master/1.dic
 ghost/master/aya5.dll
 ghost/master/aya5.txt
+ghost/master/dic/normal/download.dic
+ghost/master/dic/normal/file_drop.dic
+ghost/master/dic/normal/hotkey.dic
+ghost/master/dic/normal/m3u_export.dic
+ghost/master/dic/normal/menu_settings.dic
+ghost/master/dic/normal/mouse.dic
+ghost/master/dic/normal/resource.dic
+ghost/master/dic/normal/song_window.dic
+ghost/master/dic/normal/theme.dic
+ghost/master/dic/system
 ghost/master/saori/KI.dll
 ghost/master/saori/mciaudior.dll
 ghost/master/saori/mciaudior.txt
@@ -31,3 +41,5 @@ ghost\shell\white\surface0110.png
 ghost\shell\white\surface0111.png
 ghost\shell\white\surface0112.png
 ghost\shell\white\surfaces.txt
+readme.txt
+readme2.txt
