@@ -1,5 +1,6 @@
 ghost/master/aya5.dll
 ghost/master/aya5.txt
+ghost/master/saori/mciaudior.txt
 ghost/master/sec.ayc
 ghost\master\flele.log
 ghost\master\img\blbg_help.png
