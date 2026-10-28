@@ -107,6 +107,12 @@ On_tooltip
 		when "play_button" {
 			"曲を演奏%(□キー表示(0))"
 		}
+		when "next_button" {
+			"次の曲%(□キー表示(6))"
+		}
+		when "prev_button" {
+			"前の曲%(□キー表示(7))"
+		}
 		when "clear_button" {
 			"曲リストをクリア%(□キー表示(4))"
 		}
