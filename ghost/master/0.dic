@@ -1,15 +1,15 @@
 
 /*---------------------------------------------------------------------------------------*/
 OnChoiceSelect {
-if "%(ASC(4))RSSURL_" _in_ reference0 {
-	"\C"
-	--
-	□RSSURLジャンプ
+	if "%(ASC(4))RSSURL_" _in_ reference0 {
+		"\C"
+		--
+		□RSSURLジャンプ
 	}
-elseif "□key_" _in_ reference0 {
-	□キー選択
+	elseif "□key_" _in_ reference0 {
+		□キー選択
 	}
-else {EVAL(reference0)}
+	else {EVAL(reference0)}
 
 }
 OnAnchorSelect {EVAL(reference0)}
@@ -23,15 +23,15 @@ On_uniqueid{○uniqueid=reference0}
 
 
 アイコン {
-if ○sender == 'SSP' {
-	"\_b[img\icon_%(_argv[0]).png,inline]"
+	if ○sender == 'SSP' {
+		"\_b[img\icon_%(_argv[0]).png,inline]"
 	}
 	else {_argv[1]}
 }
 
 アイコン2 {
-if ○sender == 'SSP' {
-	"\_b[img\icon_%(_argv[0]).png,inline] "
+	if ○sender == 'SSP' {
+		"\_b[img\icon_%(_argv[0]).png,inline] "
 	}
 	else {_argv[1]}
 }
@@ -42,54 +42,54 @@ if ○sender == 'SSP' {
 
 fcl {
 	if ○sender=='SSP'&&'for flele'_in_○現在バルーン {
-	'\f[color,'
-	--
-	色番号指定
-	--
-	']'
+		'\f[color,'
+		--
+		色番号指定
+		--
+		']'
 	}
 }
 
 fcc {
 	if ○sender=='SSP'&&'for flele'_in_○現在バルーン {
-	'\f[cursorfontcolor,'
-	--
-	色番号指定
-	--
-	']'
+		'\f[cursorfontcolor,'
+		--
+		色番号指定
+		--
+		']'
 	}
 }
 
 色番号指定 {
 
 	case ○現在シェル {
-	// 灰
-	when 'Silver','Button','White','Milk','flelec','MA564J/A'	; '150,150,150'	// 黒
-	when 'Black','Klotz','Sorcerer-F'	; '10,10,10'
-	// 緑系
-	when 'Lime'	; '107,188,51'
-	when 'Mint','Gretel'	; '105,164,139'
-	// 深緑
-	when 'Saxophone'	; '61,117,89'
-	// 赤系
-	when 'Christmas carol','Fifty-four','Apple','Ayame'; '209,94,81'
-	// ピンク系
-	when 'Peach'	; '205,112,113'
-	when 'Pink'	; '220,74,132'
-	// 紫系
-	when 'Lavender','Classic'	; '142,119,155'
-	// 青系
-	when 'Blue'	; '68,153,191'
-	// 水色系
-	when 'Sky','Hebel','Summer plateau'	; '96,153,183'
-	when 'Conductor' ; '48,142,153'
-	when 'Miku','Miku - small','Miku - sitting','はちゅねさん'	; '12,186,198'
-	// 黄色系
-	when 'Lemon'	; '228,110,36'
-	when 'Orange'	; '228,110,36'
+		// 灰
+		when 'Silver','Button','White','Milk','flelec','MA564J/A'	; '150,150,150'	// 黒
+		when 'Black','Klotz','Sorcerer-F'	; '10,10,10'
+		// 緑系
+		when 'Lime'	; '107,188,51'
+		when 'Mint','Gretel'	; '105,164,139'
+		// 深緑
+		when 'Saxophone'	; '61,117,89'
+		// 赤系
+		when 'Christmas carol','Fifty-four','Apple','Ayame'; '209,94,81'
+		// ピンク系
+		when 'Peach'	; '205,112,113'
+		when 'Pink'	; '220,74,132'
+		// 紫系
+		when 'Lavender','Classic'	; '142,119,155'
+		// 青系
+		when 'Blue'	; '68,153,191'
+		// 水色系
+		when 'Sky','Hebel','Summer plateau'	; '96,153,183'
+		when 'Conductor' ; '48,142,153'
+		when 'Miku','Miku - small','Miku - sitting','はちゅねさん'	; '12,186,198'
+		// 黄色系
+		when 'Lemon'	; '228,110,36'
+		when 'Orange'	; '228,110,36'
 
-	// 他
-	others	; '49,150,153'
+		// 他
+		others	; '49,150,153'
 	}
 
 }
@@ -102,10 +102,10 @@ defc {if ○sender=='SSP'{'\f[cursorfontcolor,default]'}}
 
 mffc {
 	case ○現在シェル {
-	// 背景色が濃い場合文字を白に
-	when 'Black','Christmas carol','Apple','Ayame','Sorcerer-F','Fifty-four','Klotz'		; '255,255,255'
-	// 他は黒
-	others	; '10,10,10'
+		// 背景色が濃い場合文字を白に
+		when 'Black','Christmas carol','Apple','Ayame','Sorcerer-F','Fifty-four','Klotz'		; '255,255,255'
+		// 他は黒
+		others	; '10,10,10'
 	}
 }
 
@@ -113,54 +113,54 @@ mffc {
 
 mfbc {
 	case ○現在シェル {
-	// 緑系
-	when 'Lime'	; '180,254,84'
-	// 黒
-	when 'Black','Sorcerer-F','Klotz' ; '30,30,30'
-	//紫系
-	when 'Lavender','Classic'	; '227,213,236'
-	//黄系
-	when 'Orange','Lemon'	; '252,169,100'
-	//青系
-	when 'Blue'	; '153,209,242'
-	when 'Sky','Hebel'	; '198,219,243'
-	when 'Summer plateau'	; '209,224,255'
-	when 'Conductor'	; '209,224,255'
-	when 'Mint'	; '178,237,204'
-	when 'Miku','Miku - small','Miku - sitting','はちゅねさん'	; '223,252,255'
-	//赤系
-	when 'Christmas carol','Fifty-four','Ayame'; '221,91,96'
-	when 'Pink'	; '249,175,198'
-	when 'Peach'	; '254,191,180'
-	//黄系
-	when 'Saxophone'	; '255,238,141'
-	//茶系
-	when 'Gretel'	; '206,188,163'
-	// 他は灰色
-	others	; '230,230,230'
+		// 緑系
+		when 'Lime'	; '180,254,84'
+		// 黒
+		when 'Black','Sorcerer-F','Klotz' ; '30,30,30'
+		//紫系
+		when 'Lavender','Classic'	; '227,213,236'
+		//黄系
+		when 'Orange','Lemon'	; '252,169,100'
+		//青系
+		when 'Blue'	; '153,209,242'
+		when 'Sky','Hebel'	; '198,219,243'
+		when 'Summer plateau'	; '209,224,255'
+		when 'Conductor'	; '209,224,255'
+		when 'Mint'	; '178,237,204'
+		when 'Miku','Miku - small','Miku - sitting','はちゅねさん'	; '223,252,255'
+		//赤系
+		when 'Christmas carol','Fifty-four','Ayame'; '221,91,96'
+		when 'Pink'	; '249,175,198'
+		when 'Peach'	; '254,191,180'
+		//黄系
+		when 'Saxophone'	; '255,238,141'
+		//茶系
+		when 'Gretel'	; '206,188,163'
+		// 他は灰色
+		others	; '230,230,230'
 	}
 }
 
 //メニューバルーン背景画像
 menu_bg {
 
- if 'for flele'_in_○現在バルーン {
+	if 'for flele'_in_○現在バルーン {
 
-	'\_b[img/'
-	--
+		'\_b[img/'
+		--
 		if (ASEARCH(○現在シェル,'Lime','Pink','Peach','Black','Lavender','Orange','Blue','Sky','Mint','Christmas carol','Milk','Silver','Summer plateau','Apple','Lemon')) != -1 {
-		'blbg_help_zukai.png'
+			'blbg_help_zukai.png'
 		}
 		else { 'blbg_help_zukai2.png' }
-	--
-	','
-	--
+		--
+		','
+		--
 		if ○現在バルーン=='for flele / wide' {'46,41'}
 		else {'17,39'}
-	--
-	']'
+		--
+		']'
 
- }
+	}
 
 }
 
