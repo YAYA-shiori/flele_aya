@@ -1,4 +1,2 @@
-dic, config.dic, UTF-8
-dic, shiori3.dic, UTF-8
-dicif, optional.dic, UTF-8
-dicif, compatible.dic, UTF-8
+# dicdir, aya_lilith
+dicdir, yaya_base
