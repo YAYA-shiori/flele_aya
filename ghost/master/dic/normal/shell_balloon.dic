@@ -135,7 +135,7 @@ OnWindowStateRestore
 //------------------------------------------------------------------------------
 OnSurfaceChange
 {
-	if Reference0 != ○サーフェス {
+	if reference[0] != ○サーフェス {
 		"\0%(○サーフェス)\e"
 	}
 }
@@ -159,16 +159,14 @@ OnSurfaceChange
 }
 
 //------------------------------------------------------------------------------
-// タスクトレイのアイコンをシェルの色に合わせる（SSPのみ）
+// タスクトレイのアイコンをシェルの色に合わせる
 //------------------------------------------------------------------------------
 □タスクトレイアイコン指定
 {
-	if ○sender == "SSP" {
-		case ○現在シェル {
-			when "Black" ; "\![set,tasktrayicon,img\fle_b.ico]"
-			when "White" ; "\![set,tasktrayicon,img\fle_w.ico]"
-			when "MA564J/A" ; "\![set,tasktrayicon,img\fle_m.ico]"
-			others ; "\![set,tasktrayicon,img\fle_n.ico]"
-		}
+	case ○現在シェル {
+		when "Black" ; "\![set,tasktrayicon,img\fle_b.ico]"
+		when "White" ; "\![set,tasktrayicon,img\fle_w.ico]"
+		when "MA564J/A" ; "\![set,tasktrayicon,img\fle_m.ico]"
+		others ; "\![set,tasktrayicon,img\fle_n.ico]"
 	}
 }

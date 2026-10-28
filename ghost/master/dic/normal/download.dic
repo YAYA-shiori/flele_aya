@@ -44,7 +44,6 @@ OnURLQuery
 	_拡張子 = TOLOWER(SPLITPATH(○URL)[3])
 	if □音楽ファイルの拡張子か(_拡張子) {
 		○DL成功 = 0
-		○URL = reference[0]
 		"\0"
 		--
 		○上書き曲DL = 0

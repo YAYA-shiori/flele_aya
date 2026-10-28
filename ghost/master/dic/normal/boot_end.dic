@@ -51,7 +51,6 @@ OnFirstBoot
 	// GETSETTING(2) は ...\ghost\master\ なので、末尾の ghost\master\（13文字）を落としてゴーストのフォルダ（末尾は \）にする
 	_パス字数 = STRLEN(_path) - 13
 	○現在パス = ERASE(_path,_パス字数,13)
-	○sender = basewarename
 	○曲リスト更新 = 1
 	aitalkinterval = 80
 
@@ -148,7 +147,6 @@ OnGhostChanged
 	ERASEVAR("○曲リスト更新")
 	ERASEVAR("○hwnd")
 	ERASEVAR("○uniqueid")
-	ERASEVAR("○sender")
 	ERASEVAR("○成否")
 	ERASEVAR("txt")
 	ERASEVAR("○イベント名")

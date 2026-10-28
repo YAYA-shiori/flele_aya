@@ -13,7 +13,7 @@
 	": %(アイコン2('m3u'))曲リスト出力 :::::::::::::::::\n\n[half]"
 	--
 	"曲リストをm3u形式で出力します。\n/
-		\n%(アイコン2('point','□'))出力先パス ［\q[変更,□出力先ディレクトリ変更]］［\q[開く,□m3uフォルダを開く]］/
+		\n%(アイコン2('point'))出力先パス ［\q[変更,□出力先ディレクトリ変更]］［\q[開く,□m3uフォルダを開く]］/
 		\n%(fcl)\_!%(○m3u出力パス)\_!%(def)"
 	--
 	if ○曲の数 >= 1 {
@@ -121,18 +121,19 @@ On_m3u出力先選択
 □m3u生成
 {
 	○成否 = 0
-	_di = SPLITPATH(reference[1])[0] + SPLITPATH(reference[1])[1]
-	void FDEL(_di + "\tmp.m3u")
+	// 出力先のフォルダ（末尾は \）。ここに一時ファイルを置いてから移す
+	_di = SPLITPATH(○m3u出力パス)[0] + SPLITPATH(○m3u出力パス)[1]
+	void FDEL(_di + "tmp.m3u")
 	void FDEL(○m3u出力パス)
-	FCHARSET(0)
+	void FCHARSET(0)
 	if FOPEN("dat\tmp.m3u","w") != 0 {
 		foreach ○曲リスト ; _i {
 			_i = 絶対パス変換(_i)
-			FWRITE("dat\tmp.m3u",_i)
+			void FWRITE("dat\tmp.m3u",_i)
 		}
-		FCLOSE("dat\tmp.m3u")
+		void FCLOSE("dat\tmp.m3u")
 		if FCOPY("dat\tmp.m3u",_di) == 1 {
-			○成否 = FRENAME(_di + "\tmp.m3u",○m3u出力パス)
+			○成否 = FRENAME(_di + "tmp.m3u",○m3u出力パス)
 		}
 	}
 }

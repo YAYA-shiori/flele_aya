@@ -303,7 +303,7 @@ OnUpdateReady
 
 	"\0\s[0]%(fcl)”%(_file)”%(def) update file"
 	--
-	if_file>1 {
+	if _file > 1 {
 		"s"
 	}
 	--

@@ -13,9 +13,9 @@
 	": %(アイコン2('hotkey'))設定 :::::::::::::::::::::::::\n\n"
 	--
 
-	"%(アイコン2('point','□'))%(fcl)%(fcc)\q[音楽再生の設定,□再生設定]%(def)%(defc)\n\n[half]"
+	"%(アイコン2('point'))%(fcl)%(fcc)\q[音楽再生の設定,□再生設定]%(def)%(defc)\n\n[half]"
 	--
-	"%(アイコン2('point','□'))%(fcl)%(fcc)\q[動作設定,□動作設定]%(def)%(defc)\n\n"
+	"%(アイコン2('point'))%(fcl)%(fcc)\q[動作設定,□動作設定]%(def)%(defc)\n\n"
 	--
 
 	"\n　　　　　　　\q[CLOSE,□close]｜\q[BACK,□メニュー_index]\e"
@@ -31,7 +31,7 @@
 	": %(アイコン2('hotkey'))動作設定 :::::::::::::::::::::\n\n"
 	--
 
-	"%(アイコン2('point','□'))インアクティブ時%(fcl)Ctrl + Shift + Key%(def)でキー操作\n\n[half]"
+	"%(アイコン2('point'))インアクティブ時%(fcl)Ctrl + Shift + Key%(def)でキー操作\n\n[half]"
 	--
 	if ○ホットキー操作=="ON" {
 		"　　　　%(fcl)ON%(def) ［\q[変更,□ホットキーOFF]］"
@@ -40,7 +40,7 @@
 		"　　　　%(fcl)OFF%(def)［\q[変更,□ホットキーON]］"
 	}
 	--
-	"\n\n%(アイコン2('point','□'))曲リストメニュー(music list)を出す\n\n[half]"
+	"\n\n%(アイコン2('point'))曲リストメニュー(music list)を出す\n\n[half]"
 	--
 	if ○曲リストメニュー=="ON" {
 		"　　　　%(fcl)ON%(def) ［\q[変更,□曲リストメニューOFF]］"
@@ -107,7 +107,7 @@
 	--
 	": %(アイコン2('hotkey'))音楽再生の設定 :::::::::::::::\n\n[half]"
 	--
-	"%(アイコン2('point','□'))再生方法\n\n[half]"
+	"%(アイコン2('point'))再生方法\n\n[half]"
 	--
 	case ○演奏法 {
 		when "one" {

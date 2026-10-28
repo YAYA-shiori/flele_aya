@@ -69,7 +69,7 @@
 □メディア情報
 {
 	_v = ('','','','','','','')
-	//使えない（旧SSP、SSP以外）ときは LIB.STATUSCODE が変わらないので、先に空にしておく
+	//使えない（旧SSP）ときは LIB.STATUSCODE が変わらないので、先に空にしておく
 	LIB.STATUSCODE = ''
 	void FUNCTIONEX('internal_file','MediaInfo',_argv[0],'title','artist','album','genre','year','duration','comment')
 	//ファイルが無いなどの失敗（400/500）や使えないときは空のまま
