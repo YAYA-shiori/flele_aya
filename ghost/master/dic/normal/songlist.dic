@@ -93,18 +93,17 @@
 	// 曲が一曲以上あれば実行
 	if ○曲の数 >= 1 {
 		if _ダウンロード曲数 >= 1 {
-			"\0\s[0]曲リスト全%(○曲の数)曲をクリア、\w3ダウンロード曲全%(_ダウンロード曲数)曲を削除します。\w5宜しいですか？"
+			"\0\s[0]%(文言n('songlist.clear.confirm_dl',○曲の数,_ダウンロード曲数))"
 		}
 		else {
-			"\0\s[0]曲リスト、\w2全%(○曲の数)曲をクリアします。\n\w4/
-				宜しいですか？\w5\n[half]"
+			"\0\s[0]%(文言n('songlist.clear.confirm',○曲の数))"
 		}
 		--
 		"\n　　　 \q[OK,□曲リストクリア実行]｜\q[NG,□close]\e"
 	}
 	// 曲がなかった
 	else {
-		"\0\s[0]曲リストにはまだ何もありません。\e"
+		"\0\s[0]%(文言('songlist.clear.empty'))\e"
 	}
 }
 
@@ -123,7 +122,7 @@
 	○曲リスト更新=1
 	ERASEVAR('○演奏中曲パス')
 	void □曲名ウィンドウONなら表示
-	_script + □削除待ち処理予約 + "\cクリアしました。\e"
+	_script + □削除待ち処理予約 + "\c%(文言('songlist.clear.done'))\e"
 }
 
 //------------------------------------------------------------------------------
@@ -203,14 +202,12 @@ On_削除待ちファイル処理
 {
 	□メニューヘッダ
 	--
-	": \_b[img\icon_m3u.png,inline] 曲リスト出力 :::::::::::::::::\n\n[half]"
+	文言('songlist.m3u.title')
 	--
-	"曲リストをm3u形式で出力します。\n/
-		\n\_b[img\icon_point.png,inline] 出力先パス ［\q[変更,□出力先ディレクトリ変更]］［\q[開く,□m3uフォルダを開く]］/
-		\n%(fcl)\_!%(○m3u出力パス)\_!\f[color,default]"
+	文言('songlist.m3u.body',○m3u出力パス)
 	--
 	if ○曲の数 >= 1 {
-		"\n\n　　　　　　 ［\q[出力する,□m3uで出力]］\n"
+		文言('songlist.m3u.export')
 	}
 	else {
 		"\n\n　　　　　 - no data -\n"
@@ -226,7 +223,7 @@ On_削除待ちファイル処理
 {
 	_dir = SPLITPATH(○m3u出力パス)[0] + SPLITPATH(○m3u出力パス)[1]
 	_name = SPLITPATH(○m3u出力パス)[2]
-	"\C\![open,dialog,save,--title=曲リストの出力先,%(□タグ引数('--dir=' + _dir)),--filter=m3u|*.m3u,--ext=m3u,%(□タグ引数('--name=' + _name)),--id=On_m3u出力先選択]"
+	"\C\![open,dialog,save,--title=%(文言('songlist.m3u.dialog_title')),%(□タグ引数('--dir=' + _dir)),--filter=m3u|*.m3u,--ext=m3u,%(□タグ引数('--name=' + _name)),--id=On_m3u出力先選択]"
 }
 
 //------------------------------------------------------------------------------
@@ -245,7 +242,7 @@ On_m3u出力先選択
 		□曲リスト出力
 	}
 	elseif _拡張子 != ".m3u" {
-		"m3uファイルを選択するか、.m3uの付いたファイル名を入力してください。\n[half]/
+		"%(文言('songlist.m3u.need_ext'))\n[half]/
 			\n　 \q[CLOSE,□close]｜\q[RETRY,□出力先ディレクトリ変更]/
 			\e"
 	}
@@ -277,7 +274,7 @@ On_m3u出力先選択
 {
 	○ヘルプメニュー表示中 = 0
 	if FATTRIB(○m3u出力パス) != -1 {
-		"既に同じファイル名のファイルが存在します。\w5\n上書きしますか？\w4\n[half]/
+		"%(文言('songlist.m3u.exists'))\n[half]/
 			\n　　　 \q[OK,□m3u上書き出力]｜\q[NG,□曲リスト出力]/
 			\e"
 	}
@@ -296,14 +293,14 @@ On_m3u出力先選択
 	if ○成否 == 1 {
 		_file = SPLITPATH(○m3u出力パス)[2] + SPLITPATH(○m3u出力パス)[3]
 
-		"\0%(○サーフェス)\s[0]曲リスト%(fcl)”%(_file)”\f[color,default]を出力しました。/
+		"\0%(○サーフェス)\s[0]%(文言('songlist.m3u.done',_file))/
 			\n\n　　\q[OPEN FOLDER,□m3uフォルダを開く]/
 			\n　　　 \q[CLOSE,□close]/
 			\w9\w9\w9\w9%(○サーフェス)/
 			\e"
 	}
 	else {
-		"\0曲リスト出力に失敗しました。\e"
+		"\0%(文言('songlist.m3u.failed'))\e"
 	}
 }
 

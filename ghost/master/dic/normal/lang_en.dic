@@ -1,0 +1,158 @@
+//******************************************************************************
+// FLELE
+// 文言表（英語）。書き方は lang.dic の先頭を参照。
+// 日本語の表（lang_ja.dic）と同じキー、同じ順で並べる。
+// 日本語以外の言語を足すときは、この表を写して翻訳する。
+// 個数で言い方が変わる文言には、1個のときの「キー.1」を足す
+//******************************************************************************
+
+□文言表_en
+{
+	_t = IHASH()
+
+	//==== core.dic: ツールチップ・ボタン・他のゴーストからの話しかけ ====
+	_t['tooltip.pause'] = "Pause"
+	_t['tooltip.resume'] = "Resume"
+	_t['tooltip.replay'] = "Play the last song"
+	_t['tooltip.play'] = "Play a song"
+	_t['tooltip.next'] = "Next song"
+	_t['tooltip.prev'] = "Previous song"
+	_t['tooltip.clear'] = "Clear the song list"
+	_t['tooltip.window'] = "Show / hide the title window"
+	_t['tooltip.menu'] = "Menu"
+	_t['tooltip.minimize'] = "Minimize"
+	_t['tooltip.end'] = "Quit"
+	_t['tooltip.dblclick'] = "Double-click for the menu"
+	_t['tooltip.keyhint'] = " (Key: {0})"
+	_t['core.caption.links'] = "Links(&R)"
+	_t['core.caption.minimize'] = "Minimize(&I)"
+	_t['core.caption.readme'] = "FLELE Manual(&G)"
+	_t['core.link.apple'] = "https://www.apple.com/"
+	_t['core.communicate'] = "...\w7...\w7...\w9\w9\w5"
+
+	//==== input.dic: なで・The Hand ====
+	_t['input.stroke'] = "\w5..\w5..\w5.."
+	_t['input.hand.dbl_start'] = "..\w2..\w2..\w2..\w2..\w2..\w2."
+	_t['input.hand.start'] = "..\w2..\w2..\w2."
+	_t['input.hand.end'] = "..\w7..\w7..\w7..\w7..\w7..\w7."
+
+	//==== player.dic: 演奏の失敗 ====
+	_t['player.notfound_all'] = "\b[0]None of the songs in the list could be found.\n[half]\nPlease check that the files have not been moved or deleted.\e"
+	_t['player.notfound'] = "\b[0]{fcl}”\_!{0}\_!”\f[color,default] was not found.\n[half]\nPlease check that the file has not been moved or deleted.\e"
+	_t['player.error_code'] = "Error code {0}"
+	_t['player.error'] = "\0\b[0]\s[0]{fcl}”\_!{0}\_!”\f[color,default] could not be played.\n[half]\n\_!{1}\_!"
+
+	//==== menu.dic: ヘルプメニュー ====
+	_t['menu.change'] = "change"
+	_t['menu.index.count'] = "{fcl}{0}\f[color,default] songs  "
+	_t['menu.index.count.1'] = "{fcl}{0}\f[color,default] song  "
+	_t['menu.index.count0'] = "No songs  "
+	_t['menu.index.playing'] = "{fcl}{0}\f[color,default] playing"
+	_t['menu.index.paused'] = "{fcl}Paused\f[color,default]"
+	_t['menu.index.stopped'] = "{fcl}Stopped\f[color,default]"
+	_t['menu.index.keys'] = " \_b[img\icon_point.png,inline] Keys ［\q[config,□キー設定_pre]］\n[half]/
+		\n　Play {fcl}\f[bold,1]{0}\f[bold,default]\f[color,default]　Pause/Resume {fcl}\f[bold,1]{1}\f[bold,default]\f[color,default]/
+		\n　Next {fcl}\f[bold,1]{6}\f[bold,default]\f[color,default]　Prev {fcl}\f[bold,1]{7}\f[bold,default]\f[color,default]/
+		\n　Menu {fcl}\f[bold,1]{2}\f[bold,default]\f[color,default]　Title window {fcl}\f[bold,1]{3}\f[bold,default]\f[color,default]/
+		\n　Clear list {fcl}\f[bold,1]{4}\f[bold,default]\f[color,default]　Quit {fcl}\f[bold,1]{5}\f[bold,default]\f[color,default]/
+		"
+	_t['menu.index.row1'] = "\n\n\n[half]　\_b[img\icon_info.png,inline] \q[Manual,□readme開く]"
+	_t['menu.index.row1_songinfo'] = "　 　 \_b[img\icon_music.png,inline] \q[Now playing,□現在曲情報]"
+	_t['menu.index.row2'] = "\n　\_b[img\icon_hotkey.png,inline] \q[Settings,□設定]　\_b[img\icon_fopen.png,inline] \q[Add songs / m3u,□手動で曲を追加]"
+	_t['menu.index.row3'] = "\n　\_b[img\icon_urldl.png,inline] \q[Download from URL,□URL入力ダウンロード]"
+	_t['menu.index.row3_dlfolder'] = "　\_b[img\icon_urlfor.png,inline] \q[Downloaded songs,□DL曲のフォルダを開く]"
+	_t['menu.index.row4'] = "\n　\_b[img\icon_clear.png,inline] \q[Clear list,□曲リストクリア]　\_b[img\icon_m3u.png,inline] \q[Export list,□曲リスト出力]"
+	_t['menu.songinfo.title'] = ": \_b[img\icon_music.png,inline] Now playing ::::::::::\n\n[half]"
+	_t['menu.songinfo.missing'] = "* The file does not exist *"
+	_t['menu.settings.title'] = ": \_b[img\icon_hotkey.png,inline] Settings :::::::::::::::::::\n\n"
+	_t['menu.settings.playback'] = "Playback settings"
+	_t['menu.settings.behavior'] = "Behavior settings"
+	_t['menu.behavior.title'] = ": \_b[img\icon_hotkey.png,inline] Behavior settings :::::::::::\n\n"
+	_t['menu.behavior.hotkey'] = "\_b[img\icon_point.png,inline] Shortcut keys while inactive\n[half]　({fcl}Ctrl + Shift + Key\f[color,default])\n\n[half]"
+	_t['menu.behavior.listmenu'] = "\n\n\_b[img\icon_point.png,inline] Show the music list menu\n\n[half]"
+	_t['menu.playback.title'] = ": \_b[img\icon_hotkey.png,inline] Playback settings :::::::::::\n\n[half]"
+	_t['menu.playback.mode_label'] = "\_b[img\icon_point.png,inline] Play mode\n\n[half]"
+	_t['menu.playback.one'] = "Play one song once"
+	_t['menu.playback.loop'] = "Repeat the same song"
+	_t['menu.playback.seq_loop'] = "Repeat in list order"
+	_t['menu.playback.seq_one'] = "Play through the list once"
+	_t['menu.playback.random'] = "Shuffle and repeat"
+	_t['menu.playback.volume_label'] = "\n\n\_b[img\icon_point.png,inline] Volume\n\n[half]"
+
+	//==== keyconfig.dic: キーコンフィグ ====
+	_t['keyconfig.title'] = ": \_b[img\icon_keycon.png,inline] Key settings :::::::::::::::\n\n[half]"
+	_t['keyconfig.body'] = "Click ［change］ to pick a shortcut key, then click ［OK］ when you are done.\n/
+		\n/
+		\_b[img\icon_point.png,inline] Play: ［{0}］［\q[change,□曲再生キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Pause/Resume: ［{1}］［\q[change,□一時停止キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Next song: ［{2}］［\q[change,□次の曲キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Previous song: ［{3}］［\q[change,□前の曲キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Menu: ［{4}］［\q[change,□メニューキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Title window: ［{5}］［\q[change,□曲ウィンドウキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Clear list: ［{6}］［\q[change,□曲クリアキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] Quit: ［{7}］［\q[change,□終了キー変更]］\n\n[half]/
+		\n　　　　　　［\q[OK,□キー設定完了]］/
+		"
+	_t['keyconfig.select'] = "Please choose the key you want to use."
+	_t['keyconfig.duplicate'] = "That key is already assigned to another shortcut."
+	_t['keyconfig.done'] = "The key settings have been saved."
+
+	//==== weirds.dic: 曲リストメニュー ====
+	_t['weirds.play'] = "play"
+	_t['weirds.info'] = "information"
+	_t['weirds.open_folder'] = "open folder"
+	_t['weirds.delete'] = "delete"
+	_t['weirds.mode.folder'] = "play mode"
+	_t['weirds.mode.random'] = "shuffle, repeat"
+	_t['weirds.mode.seq_loop'] = "in order, repeat"
+	_t['weirds.mode.seq_one'] = "in order, once"
+	_t['weirds.mode.one'] = "one song, once"
+	_t['weirds.mode.loop'] = "one song, repeat"
+	_t['weirds.info.title'] = "\v: \_b[img\icon_music.png,inline] Song info ::::::::::\n\n[half]"
+
+	//==== song_add.dic: 曲の追加・ダウンロード ====
+	_t['song.manual.title'] = ": \_b[img\icon_fopen.png,inline] Add songs / m3u :::::::\n\n"
+	_t['song.manual.body'] = "\_b[img\icon_point.png,inline] {fcl}{fcc}\q[Browse and add,□曲を参照して追加]\n　/
+		└\q[Add all songs in a folder,□フォルダを参照して追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
+		\_b[img\icon_point.png,inline] {fcl}{fcc}\q[Enter a path to add,□曲をパス入力で追加]\n　/
+		└\q[Enter a folder path to add,□フォルダをパス入力で追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
+		"
+	_t['song.dialog.file_title'] = "Select songs or playlists"
+	_t['song.dialog.file_filter'] = "Music files / playlists"
+	_t['song.dialog.all_files'] = "All files"
+	_t['song.dialog.folder_title'] = "Select a folder of songs to add"
+	_t['song.url.invalid'] = "Please enter the URL of a sound file."
+	_t['song.added'] = "{0} songs added.\w5\nSongs in the list: {1}"
+	_t['song.added.1'] = "{0} song added.\w5\nSongs in the list: {1}"
+	_t['song.already'] = "That song is already in the list."
+	_t['song.none'] = "No music files could be added."
+	_t['song.dl.exists'] = "A file with the same name has already been downloaded.\w5\nOverwrite it?\w4"
+	_t['song.dl.move_failed'] = "Could not move {0} to the sound_file folder."
+	_t['song.dl.overwritten'] = "{0} was overwritten."
+
+	//==== songlist.dic: 曲リストのクリア・m3u出力 ====
+	_t['songlist.clear.confirm_dl'] = "Clear the song list ({0} songs) and delete the downloaded songs ({1})?\w5"
+	_t['songlist.clear.confirm_dl.1'] = "Clear the song list (1 song) and delete the downloaded songs ({1})?\w5"
+	_t['songlist.clear.confirm'] = "Clear the song list ({0} songs)?\w5\n[half]"
+	_t['songlist.clear.confirm.1'] = "Clear the song list (1 song)?\w5\n[half]"
+	_t['songlist.clear.empty'] = "The song list is empty."
+	_t['songlist.clear.done'] = "Cleared."
+	_t['songlist.m3u.title'] = ": \_b[img\icon_m3u.png,inline] Export song list :::::::\n\n[half]"
+	_t['songlist.m3u.body'] = "Exports the song list as an m3u file.\n/
+		\n\_b[img\icon_point.png,inline] Save to ［\q[change,□出力先ディレクトリ変更]］［\q[open,□m3uフォルダを開く]］/
+		\n{fcl}\_!{0}\_!\f[color,default]"
+	_t['songlist.m3u.export'] = "\n\n　　　　　　 ［\q[export,□m3uで出力]］\n"
+	_t['songlist.m3u.dialog_title'] = "Save the song list as"
+	_t['songlist.m3u.need_ext'] = "Please choose an m3u file, or enter a file name ending in .m3u."
+	_t['songlist.m3u.exists'] = "A file with the same name already exists.\w5\nOverwrite it?\w4"
+	_t['songlist.m3u.done'] = "The song list {fcl}”{0}”\f[color,default] was exported."
+	_t['songlist.m3u.failed'] = "Failed to export the song list."
+
+	//==== network_event.dic: ネットワークのイベント ====
+	_t['net.sntp.done'] = "The time has been adjusted."
+	_t['net.rss.latest'] = " latest {0} items"
+	_t['net.created.dau'] = "{fcl}”updates2.dau”\f[color,default] has been created."
+	_t['net.created.nar'] = "{0}{fcl}”{1}”\f[color,default] has been created."
+
+	_t
+}

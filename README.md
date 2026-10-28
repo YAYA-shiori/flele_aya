@@ -83,6 +83,14 @@ FLELE は音楽の再生を SSP 本体に任せています。環境によって
 曲リストメニューを使わない設定にしているときは、ヘルプメニューの「設定」>「音楽再生の設定」で、［－］［＋］を押して調節します。
 SSP 本体のサウンドの音量（`--volume`）を変えるもので、パソコン全体の音量は変わりません。
 
+#### 表示言語（English）
+
+SSP の言語設定に合わせて、メニューやメッセージの言語が自動で切り替わります（日本語 / English）。
+SSP を日本語以外で起動したときや、言語リソースを日本語以外に切り替えたときは、英語で応えます。
+言語を追加するための仕組みもあります。詳しくは `GHOST.md` の「表示言語」を見てください。
+
+The menus and messages follow the language of SSP. When SSP runs in a language other than Japanese, or you switch the language resource to one, FLELE answers in English. (This manual is still in Japanese only.)
+
 #### トーク
 
 もともとトークの無いゴーストにしようと思って作ったので、これ以上増えないと思います。

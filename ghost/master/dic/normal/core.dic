@@ -60,8 +60,11 @@ OnSecondChange
 OnCommunicate
 {
 	if reference[0] != "user" && reference[0] != "User" {
-		if "音楽" _in_ reference[1] || "サウンド" _in_ reference[1] || "曲" _in_ reference[1] {
-			if "再生" _in_ reference[1] || "演奏" _in_ reference[1] || "かけて" _in_ reference[1] || "歌って" _in_ reference[1] {
+		//他のゴーストの言語はSSPの言語と関係ないので、日本語と英語のどちらの言葉にも反応する
+		//（英語は単語の切れ目で判定する。using や display のような別の単語の一部には反応しない）
+		_text = TOLOWER(reference[1])
+		if "音楽" _in_ _text || "サウンド" _in_ _text || "曲" _in_ _text || RE_SEARCH(_text,'\b(music|sound|songs?)\b') {
+			if "再生" _in_ _text || "演奏" _in_ _text || "かけて" _in_ _text || "歌って" _in_ _text || RE_SEARCH(_text,'\b(play|sing)\b') {
 				// 応答の Reference0 を空にする
 				res_reference[0] = ""
 				//トークの後ろにつなぐので、演奏中に付く先頭の \C は外す
@@ -69,7 +72,7 @@ OnCommunicate
 				if SUBSTR(_s,0,2) == "\C" {
 					_s = ERASE(_s,0,2)
 				}
-				"\0\s[0]\c…\w7…\w7…。\w9\w9\w5\b[-1]\s[25]\w9%(_s)"
+				"\0\s[0]\c%(文言('core.communicate'))\b[-1]\s[25]\w9%(_s)"
 			}
 		}
 	}
@@ -95,43 +98,43 @@ On_tooltip
 	case _c {
 		when "stop_button1","stop_button2" {
 			if ○演奏中 == 1 {
-				"一時停止%(□キー表示(1))"
+				"%(文言('tooltip.pause'))%(□キー表示(1))"
 			}
 			elseif ○一時停止中 == 1 {
-				"再開%(□キー表示(1))"
+				"%(文言('tooltip.resume'))%(□キー表示(1))"
 			}
 			else {
-				"前回の曲を演奏%(□キー表示(1))"
+				"%(文言('tooltip.replay'))%(□キー表示(1))"
 			}
 		}
 		when "play_button" {
-			"曲を演奏%(□キー表示(0))"
+			"%(文言('tooltip.play'))%(□キー表示(0))"
 		}
 		when "next_button" {
-			"次の曲%(□キー表示(6))"
+			"%(文言('tooltip.next'))%(□キー表示(6))"
 		}
 		when "prev_button" {
-			"前の曲%(□キー表示(7))"
+			"%(文言('tooltip.prev'))%(□キー表示(7))"
 		}
 		when "clear_button" {
-			"曲リストをクリア%(□キー表示(4))"
+			"%(文言('tooltip.clear'))%(□キー表示(4))"
 		}
 		when "k_window" {
-			"曲名ウィンドウの表示/非表示%(□キー表示(3))"
+			"%(文言('tooltip.window'))%(□キー表示(3))"
 		}
 		when "menu" {
-			"メニュー%(□キー表示(2))"
+			"%(文言('tooltip.menu'))%(□キー表示(2))"
 		}
 		when "minimize" {
-			"最小化"
+			文言('tooltip.minimize')
 		}
 		when "end_sect" {
-			"終了%(□キー表示(5))"
+			"%(文言('tooltip.end'))%(□キー表示(5))"
 		}
 		when "stroke_p" {
 		}
 		others {
-			"ダブルクリックでメニュー%(□キー表示(2))"
+			"%(文言('tooltip.dblclick'))%(□キー表示(2))"
 		}
 	}
 }
@@ -143,7 +146,7 @@ On_tooltip
 {
 	_k = ○キー設定[_argv[0]]
 	if _k != "" {
-		"（キー: %(TOUPPER(_k))）"
+		文言('tooltip.keyhint',TOUPPER(_k))
 	}
 }
 
@@ -173,7 +176,7 @@ On_portalrootbutton.visible
 // リンクのボタン
 On_recommendrootbutton.caption
 {
-	"リンク(&R)"
+	文言('core.caption.links')
 }
 
 // \1 側のリンクのボタン（出さない）
@@ -190,13 +193,13 @@ On_kero.recommendbutton.visible
 // 最小化のボタン
 On_hidebutton.caption
 {
-	"最小化(&I)"
+	文言('core.caption.minimize')
 }
 
 // 説明書のボタン
 On_readmebutton.caption
 {
-	"FLELE取扱説明書(&G)"
+	文言('core.caption.readme')
 }
 
 //------------------------------------------------------------------------------
@@ -210,7 +213,7 @@ On_sakura.recommendsites
 	https://github.com/YAYA-shiori/flele_aya%(ASC(2))/
 
 	iPod shuffle%(ASC(1))/
-	https://www.apple.com/jp/%(ASC(2))/
+	%(文言('core.link.apple'))%(ASC(2))/
 
 	SSP%(ASC(1))/
 	https://ssp.shillest.net/%(ASC(2))/

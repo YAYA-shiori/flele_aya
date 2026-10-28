@@ -35,7 +35,7 @@ OnSNTPCorrect
 		\_q\n[half]/
 		%(fcl)%(_時刻)\f[color,default]\n/
 		\n[half]/
-		\_q時刻を合わせました。\w9\w9\w9\w9%(○サーフェス)\e"
+		\_q%(文言('net.sntp.done'))\w9\w9\w9\w9%(○サーフェス)\e"
 }
 
 OnSNTPFailure
@@ -170,7 +170,7 @@ OnRSSComplete
 		_表示件数 = 11
 	}
 
-	"%(fcl)”\q[%(reference[0]),%(reference[1])]”\f[color,default] 最新%(_表示件数)件\n[half]\n"
+	"%(fcl)”\q[%(reference[0]),%(reference[1])]”\f[color,default]%(文言('net.rss.latest',_表示件数))\n[half]\n"
 	--
 	//本文//
 	_i = 1
@@ -277,12 +277,12 @@ OnNarCreating
 
 OnUpdatedataCreated
 {
-	"\0%(○サーフェス)\s[0]%(fcl)”updates2.dau”\f[color,default]を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
+	"\0%(○サーフェス)\s[0]%(文言('net.created.dau'))\w9\w9\w9\w9%(○サーフェス)\e"
 }
 
 OnNarCreated
 {
-	"\0%(○サーフェス)\s[0]%(reference[2])%(fcl)”%(reference[0])”\f[color,default]を作成しました。\w9\w9\w9\w9%(○サーフェス)\e"
+	"\0%(○サーフェス)\s[0]%(文言('net.created.nar',reference[2],reference[0]))\w9\w9\w9\w9%(○サーフェス)\e"
 }
 
 //******************************************************************************

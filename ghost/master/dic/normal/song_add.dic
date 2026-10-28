@@ -10,13 +10,9 @@
 {
 	□メニューヘッダ
 	--
-	": \_b[img\icon_fopen.png,inline] 曲/m3u手動追加 ::::::::::::::::\n\n"
+	文言('song.manual.title')
 	--
-	"\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[参照して追加,□曲を参照して追加]\n　/
-		└\q[フォルダの曲を全て追加,□フォルダを参照して追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
-		\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[パスを入力して追加,□曲をパス入力で追加]\n　/
-		└\q[フォルダのパスを入力して追加,□フォルダをパス入力で追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
-		"
+	文言('song.manual.body')
 	--
 	"\n\n　　　　　　 \q[CLOSE,□close]｜\q[BACK,□メニュー_index]\e"
 }
@@ -29,7 +25,7 @@
 //------------------------------------------------------------------------------
 □曲を参照して追加
 {
-	"\C\![open,dialog,open,--title=曲/m3uを選択,--filter=音楽ファイル/m3u|*.mid;*.mp3;*.wav;*.wma;*.ogg;*.m4a;*.aac;*.flac;*.opus;*.m3u;*.pls|すべてのファイル|*.*,--id=On_曲ファイル選択]"
+	"\C\![open,dialog,open,--title=%(文言('song.dialog.file_title')),--filter=%(文言('song.dialog.file_filter'))|*.mid;*.mp3;*.wav;*.wma;*.ogg;*.m4a;*.aac;*.flac;*.opus;*.m3u;*.pls|%(文言('song.dialog.all_files'))|*.*,--id=On_曲ファイル選択]"
 }
 
 //------------------------------------------------------------------------------
@@ -49,7 +45,7 @@ On_曲ファイル選択
 //------------------------------------------------------------------------------
 □フォルダを参照して追加
 {
-	"\C\![open,dialog,folder,--title=曲を追加するフォルダを選択,--id=On_曲フォルダ選択]"
+	"\C\![open,dialog,folder,--title=%(文言('song.dialog.folder_title')),--id=On_曲フォルダ選択]"
 }
 
 //------------------------------------------------------------------------------
@@ -137,7 +133,7 @@ OnUserInput
 			}
 			//　URLじゃなかったら警告
 			else {
-				"サウンドファイルのURLを入力してください。\n[half]/
+				"%(文言('song.url.invalid'))\n[half]/
 					\n　 \q[CLOSE,□close]｜\q[RETRY,□URL入力ダウンロード]/
 					\e"
 			}
@@ -287,7 +283,7 @@ OnDirectoryDrop
 		if ○曲の数 == 1 {
 			○曲リスト = ○曲リスト[0]
 		}
-		"\b[0]\c%(○サーフェス)\s[0]%(_追加した曲数)曲追加。\w5\n曲リストには全%(○曲の数)曲入ってます。"
+		"\b[0]\c%(○サーフェス)\s[0]%(文言n('song.added',_追加した曲数,○曲の数))"
 		--
 		if _追加した曲数 == 1 {
 			"\n\n[half]　　 \q[PLAY,□ドロップ曲再生]｜\q[CLOSE,□close]"
@@ -302,11 +298,11 @@ OnDirectoryDrop
 		--
 		//既に入ってた曲を1つ以上ドロップされた
 		if _既に入ってた曲数 > 0 {
-			"\b[0]\s[0]その曲はもう既に入っています。\w9\w9\w9\w9%(○サーフェス)"
+			"\b[0]\s[0]%(文言('song.already'))\w9\w9\w9\w9%(○サーフェス)"
 		}
 		//音楽ファイルが1つも無かった
 		else {
-			"\b[0]\s[0]追加できる音楽ファイルがありませんでした。\w9\w9\w9\w9%(○サーフェス)"
+			"\b[0]\s[0]%(文言('song.none'))\w9\w9\w9\w9%(○サーフェス)"
 		}
 	}
 	//　セーブ
@@ -400,7 +396,7 @@ OnURLQuery
 		○上書き曲DL = 0
 		_file = □URLのファイル名
 		if FATTRIB("..\..\sound_file\%(_file)") != -1 {
-			"\b[0]既に同じ名前のファイルがダウンロードされています。\w5\n上書きしますか？\w4\n[half]/
+			"\b[0]%(文言('song.dl.exists'))\n[half]/
 				\n　　　 \q[OK,□上書き曲ダウンロード]｜\q[NG,□close]/
 				\e"
 		}
@@ -450,10 +446,10 @@ OnExecuteHTTPComplete
 		--
 		if _i != 1 {
 			○上書き曲DL = 0
-			"\0\s[6]%(_ファイル名)をsound_fileフォルダに移動できませんでした。\w9\w9\w9\w9%(○サーフェス)\e"
+			"\0\s[6]%(文言('song.dl.move_failed',_ファイル名))\w9\w9\w9\w9%(○サーフェス)\e"
 		}
 		elseif ○上書き曲DL == 1 {
-			"\0\s[0]%(_ファイル名)を上書きしました。/
+			"\0\s[0]%(文言('song.dl.overwritten',_ファイル名))/
 				\n\n[half]　　 \q[PLAY,□上書き曲再生]｜\q[CLOSE,□close]/
 				\e"
 			○上書き曲DL = 0

@@ -44,7 +44,7 @@
 	--
 	// 曲インフォ -------------------------
 	if ○曲の数 >=1 {
-		"現在全%(fcl)%(○曲の数)\f[color,default]曲　"
+		文言n('menu.index.count',○曲の数)
 		--
 		if ○演奏中 == 1 {
 			//　文字数12を越えたら省略
@@ -53,17 +53,17 @@
 				_抜き出し = SUBSTR("%(○演奏中曲名)",0,12)
 				_表示曲名 = "%(_抜き出し)…"
 			}
-			"%(fcl)%(_表示曲名)\f[color,default] 演奏中"
+			文言('menu.index.playing',_表示曲名)
 		}
 		elseif ○一時停止中 == 1 {
-			"%(fcl)一時停止中\f[color,default]"
+			文言('menu.index.paused')
 		}
 		else {
-			"%(fcl)演奏停止中\f[color,default]"
+			文言('menu.index.stopped')
 		}
 	}
 	else {
-		"現在全0曲　"
+		文言('menu.index.count0')
 	}
 	--
 	if ○現在バルーン=='for flele' {
@@ -77,39 +77,31 @@
 	}
 	--
 	// キーインフォ -------------------------
-	" \_b[img\icon_point.png,inline] キー操作表 ［\q[コンフィグ,□キー設定_pre]］\n[half]/
-		\n　再生 %(fcl)\f[bold,1]%(キー設定表示名(0))\f[bold,default]\f[color,default]　停止/解除 %(fcl)\f[bold,1]%(キー設定表示名(1))\f[bold,default]\f[color,default]/
-		\n　次の曲 %(fcl)\f[bold,1]%(キー設定表示名(6))\f[bold,default]\f[color,default]　前の曲 %(fcl)\f[bold,1]%(キー設定表示名(7))\f[bold,default]\f[color,default]/
-		\n　Menu %(fcl)\f[bold,1]%(キー設定表示名(2))\f[bold,default]\f[color,default]　曲名ｳｨﾝﾄﾞｳ %(fcl)\f[bold,1]%(キー設定表示名(3))\f[bold,default]\f[color,default]/
-		\n　曲クリア %(fcl)\f[bold,1]%(キー設定表示名(4))\f[bold,default]\f[color,default]　終了 %(fcl)\f[bold,1]%(キー設定表示名(5))\f[bold,default]\f[color,default]/
-		"
+	文言('menu.index.keys',キー設定表示名(0),キー設定表示名(1),キー設定表示名(2),キー設定表示名(3),キー設定表示名(4),キー設定表示名(5),キー設定表示名(6),キー設定表示名(7))
 
 	--
 	// 1段目 -------------------------
-	"\n\n\n[half]　\_b[img\icon_info.png,inline] \q[説明書,□readme開く]"
+	文言('menu.index.row1')
 	--
 	if ○曲の数 >= 1 && ○起動中演奏回 >= 1 {
-		"　 　 　 \_b[img\icon_music.png,inline] \q[演奏中曲情報,□現在曲情報]"
+		文言('menu.index.row1_songinfo')
 	}
 	--
 
 	// 2段目 -------------------------
-	"\n　\_b[img\icon_hotkey.png,inline] \q[設定,□設定]"
-	--
-
-	"　\_b[img\icon_fopen.png,inline] \q[曲/m3u手動追加,□手動で曲を追加]"
+	文言('menu.index.row2')
 	--
 
 	// 3段目 -------------------------
-	"\n　\_b[img\icon_urldl.png,inline] \q[URL入力DL,□URL入力ダウンロード]"
+	文言('menu.index.row3')
 	--
 	if ARRAYSIZE(○ダウンロード曲リスト) > 0 {
-		"　　\_b[img\icon_urlfor.png,inline] \q[DLした曲を確認,□DL曲のフォルダを開く]"
+		文言('menu.index.row3_dlfolder')
 	}
 	--
 
 	// 4段目 -------------------------
-	"\n　\_b[img\icon_clear.png,inline] \q[曲リストクリア,□曲リストクリア]　\_b[img\icon_m3u.png,inline] \q[曲リスト出力,□曲リスト出力]"
+	文言('menu.index.row4')
 	--
 	// ナビ -------------------------
 	"\n\n　　　　　　　　\q[CLOSE,□close]\e"
@@ -135,7 +127,7 @@
 	○イベント名 = "□現在曲情報"
 	□メニューヘッダ
 	--
-	": \_b[img\icon_music.png,inline]演奏中曲情報 ::::::::::\n\n[half]"
+	文言('menu.songinfo.title')
 	--
 	□曲情報中身
 	--
@@ -152,7 +144,7 @@
 {
 	_path = 絶対パス変換(○path)
 	if FATTRIB(_path) == -1 {
-		"%(fcl)* ファイルが存在しません *\f[color,default]\n/
+		"%(fcl)%(文言('menu.songinfo.missing'))\f[color,default]\n/
 			%(fcl)Number　 \f[color,default]: %(○No)　( Total %(○曲の数) )\n/
 			%(fcl)Filepath \f[color,default]: \_!%(○path)\_!\n/
 			"
@@ -202,12 +194,12 @@
 {
 	□メニューヘッダ
 	--
-	": \_b[img\icon_hotkey.png,inline] 設定 :::::::::::::::::::::::::\n\n"
+	文言('menu.settings.title')
 	--
 
-	"\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[音楽再生の設定,□再生設定]\f[color,default]\f[cursorfontcolor,default]\n\n[half]"
+	"\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[%(文言('menu.settings.playback')),□再生設定]\f[color,default]\f[cursorfontcolor,default]\n\n[half]"
 	--
-	"\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[動作設定,□動作設定]\f[color,default]\f[cursorfontcolor,default]\n\n"
+	"\_b[img\icon_point.png,inline] %(fcl)%(fcc)\q[%(文言('menu.settings.behavior')),□動作設定]\f[color,default]\f[cursorfontcolor,default]\n\n"
 	--
 
 	"\n　　　　　　　\q[CLOSE,□close]｜\q[BACK,□メニュー_index]\e"
@@ -220,25 +212,25 @@
 {
 	□メニューヘッダ
 	--
-	": \_b[img\icon_hotkey.png,inline] 動作設定 :::::::::::::::::::::\n\n"
+	文言('menu.behavior.title')
 	--
 
-	"\_b[img\icon_point.png,inline] インアクティブ時%(fcl)Ctrl + Shift + Key\f[color,default]でキー操作\n\n[half]"
+	文言('menu.behavior.hotkey')
 	--
 	if ○ホットキー操作=="ON" {
-		"　　　　%(fcl)ON\f[color,default] ［\q[変更,□ホットキーOFF]］"
+		"　　　　%(fcl)ON\f[color,default] ［\q[%(文言('menu.change')),□ホットキーOFF]］"
 	}
 	else {
-		"　　　　%(fcl)OFF\f[color,default]［\q[変更,□ホットキーON]］"
+		"　　　　%(fcl)OFF\f[color,default]［\q[%(文言('menu.change')),□ホットキーON]］"
 	}
 	--
-	"\n\n\_b[img\icon_point.png,inline] 曲リストメニュー(music list)を出す\n\n[half]"
+	文言('menu.behavior.listmenu')
 	--
 	if ○曲リストメニュー=="ON" {
-		"　　　　%(fcl)ON\f[color,default] ［\q[変更,□曲リストメニューOFF]］"
+		"　　　　%(fcl)ON\f[color,default] ［\q[%(文言('menu.change')),□曲リストメニューOFF]］"
 	}
 	else {
-		"　　　　%(fcl)OFF\f[color,default]［\q[変更,□曲リストメニューON]］"
+		"　　　　%(fcl)OFF\f[color,default]［\q[%(文言('menu.change')),□曲リストメニューON]］"
 	}
 	--
 
@@ -297,29 +289,29 @@
 {
 	□メニューヘッダ
 	--
-	": \_b[img\icon_hotkey.png,inline] 音楽再生の設定 :::::::::::::::\n\n[half]"
+	文言('menu.playback.title')
 	--
-	"\_b[img\icon_point.png,inline] 再生方法\n\n[half]"
+	文言('menu.playback.mode_label')
 	--
 	case ○演奏法 {
 		when "one" {
-			"　　 %(fcl)一曲を一度だけ再生\f[color,default]［\q[変更,□演奏法loop]］"
+			"　　 %(fcl)%(文言('menu.playback.one'))\f[color,default]［\q[%(文言('menu.change')),□演奏法loop]］"
 		}
 		when "loop" {
-			"　　 %(fcl)同じ曲をエンドレス再生\f[color,default]［\q[変更,□演奏法random]］"
+			"　　 %(fcl)%(文言('menu.playback.loop'))\f[color,default]［\q[%(文言('menu.change')),□演奏法random]］"
 		}
 		when "seq_loop" {
-			"　　 %(fcl)リスト順にエンドレス再生\f[color,default]［\q[変更,□演奏法seq_one]］"
+			"　　 %(fcl)%(文言('menu.playback.seq_loop'))\f[color,default]［\q[%(文言('menu.change')),□演奏法seq_one]］"
 		}
 		when "seq_one" {
-			"　　 %(fcl)リスト順に一周だけ再生\f[color,default]［\q[変更,□演奏法one]］"
+			"　　 %(fcl)%(文言('menu.playback.seq_one'))\f[color,default]［\q[%(文言('menu.change')),□演奏法one]］"
 		}
 		others {
-			"　　 %(fcl)ランダムでエンドレス再生\f[color,default]［\q[変更,□演奏法seq_loop]］"
+			"　　 %(fcl)%(文言('menu.playback.random'))\f[color,default]［\q[%(文言('menu.change')),□演奏法seq_loop]］"
 		}
 	}
 	--
-	"\n\n\_b[img\icon_point.png,inline] 音量\n\n[half]"
+	文言('menu.playback.volume_label')
 	--
 	"　　 %(fcl)%(○音量)\f[color,default]　［\q[－,□音量下げ]］［\q[＋,□音量上げ]］"
 	--

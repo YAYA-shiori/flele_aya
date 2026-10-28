@@ -1,0 +1,152 @@
+//******************************************************************************
+// FLELE
+// 文言表（日本語）。書き方は lang.dic の先頭を参照。
+// キーは「画面.項目」の形。英語の表（lang_en.dic）と同じキー、同じ順で並べる
+//******************************************************************************
+
+□文言表_ja
+{
+	_t = IHASH()
+
+	//==== core.dic: ツールチップ・ボタン・他のゴーストからの話しかけ ====
+	_t['tooltip.pause'] = "一時停止"
+	_t['tooltip.resume'] = "再開"
+	_t['tooltip.replay'] = "前回の曲を演奏"
+	_t['tooltip.play'] = "曲を演奏"
+	_t['tooltip.next'] = "次の曲"
+	_t['tooltip.prev'] = "前の曲"
+	_t['tooltip.clear'] = "曲リストをクリア"
+	_t['tooltip.window'] = "曲名ウィンドウの表示/非表示"
+	_t['tooltip.menu'] = "メニュー"
+	_t['tooltip.minimize'] = "最小化"
+	_t['tooltip.end'] = "終了"
+	_t['tooltip.dblclick'] = "ダブルクリックでメニュー"
+	_t['tooltip.keyhint'] = "（キー: {0}）"
+	_t['core.caption.links'] = "リンク(&R)"
+	_t['core.caption.minimize'] = "最小化(&I)"
+	_t['core.caption.readme'] = "FLELE取扱説明書(&G)"
+	_t['core.link.apple'] = "https://www.apple.com/jp/"
+	_t['core.communicate'] = "…\w7…\w7…。\w9\w9\w5"
+
+	//==== input.dic: なで・The Hand ====
+	_t['input.stroke'] = "\w5‥\w5‥\w5‥"
+	_t['input.hand.dbl_start'] = "…\w2…\w2…\w2…\w2…\w2…\w2。"
+	_t['input.hand.start'] = "…\w2…\w2…\w2。"
+	_t['input.hand.end'] = "…\w7…\w7…\w7…\w7…\w7…\w7。"
+
+	//==== player.dic: 演奏の失敗 ====
+	_t['player.notfound_all'] = "\b[0]曲リストの曲が見つかりませんでした。\n[half]\nファイルを移動・削除していないか確かめてください。\e"
+	_t['player.notfound'] = "\b[0]{fcl}”\_!{0}\_!”\f[color,default]が見つかりません。\n[half]\nファイルを移動・削除していないか確かめてください。\e"
+	_t['player.error_code'] = "エラーコード {0}"
+	_t['player.error'] = "\0\b[0]\s[0]{fcl}”\_!{0}\_!”\f[color,default]を再生できませんでした。\n[half]\n\_!{1}\_!"
+
+	//==== menu.dic: ヘルプメニュー ====
+	_t['menu.change'] = "変更"
+	_t['menu.index.count'] = "現在全{fcl}{0}\f[color,default]曲　"
+	_t['menu.index.count0'] = "現在全0曲　"
+	_t['menu.index.playing'] = "{fcl}{0}\f[color,default] 演奏中"
+	_t['menu.index.paused'] = "{fcl}一時停止中\f[color,default]"
+	_t['menu.index.stopped'] = "{fcl}演奏停止中\f[color,default]"
+	_t['menu.index.keys'] = " \_b[img\icon_point.png,inline] キー操作表 ［\q[コンフィグ,□キー設定_pre]］\n[half]/
+		\n　再生 {fcl}\f[bold,1]{0}\f[bold,default]\f[color,default]　停止/解除 {fcl}\f[bold,1]{1}\f[bold,default]\f[color,default]/
+		\n　次の曲 {fcl}\f[bold,1]{6}\f[bold,default]\f[color,default]　前の曲 {fcl}\f[bold,1]{7}\f[bold,default]\f[color,default]/
+		\n　Menu {fcl}\f[bold,1]{2}\f[bold,default]\f[color,default]　曲名ｳｨﾝﾄﾞｳ {fcl}\f[bold,1]{3}\f[bold,default]\f[color,default]/
+		\n　曲クリア {fcl}\f[bold,1]{4}\f[bold,default]\f[color,default]　終了 {fcl}\f[bold,1]{5}\f[bold,default]\f[color,default]/
+		"
+	_t['menu.index.row1'] = "\n\n\n[half]　\_b[img\icon_info.png,inline] \q[説明書,□readme開く]"
+	_t['menu.index.row1_songinfo'] = "　 　 　 \_b[img\icon_music.png,inline] \q[演奏中曲情報,□現在曲情報]"
+	_t['menu.index.row2'] = "\n　\_b[img\icon_hotkey.png,inline] \q[設定,□設定]　\_b[img\icon_fopen.png,inline] \q[曲/m3u手動追加,□手動で曲を追加]"
+	_t['menu.index.row3'] = "\n　\_b[img\icon_urldl.png,inline] \q[URL入力DL,□URL入力ダウンロード]"
+	_t['menu.index.row3_dlfolder'] = "　　\_b[img\icon_urlfor.png,inline] \q[DLした曲を確認,□DL曲のフォルダを開く]"
+	_t['menu.index.row4'] = "\n　\_b[img\icon_clear.png,inline] \q[曲リストクリア,□曲リストクリア]　\_b[img\icon_m3u.png,inline] \q[曲リスト出力,□曲リスト出力]"
+	_t['menu.songinfo.title'] = ": \_b[img\icon_music.png,inline]演奏中曲情報 ::::::::::\n\n[half]"
+	_t['menu.songinfo.missing'] = "* ファイルが存在しません *"
+	_t['menu.settings.title'] = ": \_b[img\icon_hotkey.png,inline] 設定 :::::::::::::::::::::::::\n\n"
+	_t['menu.settings.playback'] = "音楽再生の設定"
+	_t['menu.settings.behavior'] = "動作設定"
+	_t['menu.behavior.title'] = ": \_b[img\icon_hotkey.png,inline] 動作設定 :::::::::::::::::::::\n\n"
+	_t['menu.behavior.hotkey'] = "\_b[img\icon_point.png,inline] インアクティブ時{fcl}Ctrl + Shift + Key\f[color,default]でキー操作\n\n[half]"
+	_t['menu.behavior.listmenu'] = "\n\n\_b[img\icon_point.png,inline] 曲リストメニュー(music list)を出す\n\n[half]"
+	_t['menu.playback.title'] = ": \_b[img\icon_hotkey.png,inline] 音楽再生の設定 :::::::::::::::\n\n[half]"
+	_t['menu.playback.mode_label'] = "\_b[img\icon_point.png,inline] 再生方法\n\n[half]"
+	_t['menu.playback.one'] = "一曲を一度だけ再生"
+	_t['menu.playback.loop'] = "同じ曲をエンドレス再生"
+	_t['menu.playback.seq_loop'] = "リスト順にエンドレス再生"
+	_t['menu.playback.seq_one'] = "リスト順に一周だけ再生"
+	_t['menu.playback.random'] = "ランダムでエンドレス再生"
+	_t['menu.playback.volume_label'] = "\n\n\_b[img\icon_point.png,inline] 音量\n\n[half]"
+
+	//==== keyconfig.dic: キーコンフィグ ====
+	_t['keyconfig.title'] = ": \_b[img\icon_keycon.png,inline] キーコンフィグ :::::::::::::::\n\n[half]"
+	_t['keyconfig.body'] = "ショートカットキーの［変更］から設定を変更し、決まったら［これで決定］をクリックしてください。\n/
+		\n/
+		\_b[img\icon_point.png,inline] 曲再生　　　　［{0}］［\q[変更,□曲再生キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 一時停止　　　［{1}］［\q[変更,□一時停止キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 次の曲　　　　［{2}］［\q[変更,□次の曲キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 前の曲　　　　［{3}］［\q[変更,□前の曲キー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] メニュー　　　［{4}］［\q[変更,□メニューキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 曲名ウィンドウ［{5}］［\q[変更,□曲ウィンドウキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 曲クリア　　　［{6}］［\q[変更,□曲クリアキー変更]］\n\n[half]/
+		\_b[img\icon_point.png,inline] 終了　　　　　［{7}］［\q[変更,□終了キー変更]］\n\n[half]/
+		\n　　　　　　［\q[これで決定,□キー設定完了]］/
+		"
+	_t['keyconfig.select'] = "設定したいキーを選択してください。"
+	_t['keyconfig.duplicate'] = "そのキーは既に他のショートカットに設定されています。"
+	_t['keyconfig.done'] = "キー設定完了しました。"
+
+	//==== weirds.dic: 曲リストメニュー ====
+	_t['weirds.play'] = "再生"
+	_t['weirds.info'] = "情報"
+	_t['weirds.open_folder'] = "フォルダを開く"
+	_t['weirds.delete'] = "削除"
+	_t['weirds.mode.folder'] = "再生法変更"
+	_t['weirds.mode.random'] = "ランダムでエンドレス"
+	_t['weirds.mode.seq_loop'] = "リスト順にエンドレス"
+	_t['weirds.mode.seq_one'] = "リスト順に一周だけ"
+	_t['weirds.mode.one'] = "一曲を一度だけ"
+	_t['weirds.mode.loop'] = "同じ曲をエンドレス"
+	_t['weirds.info.title'] = "\v: \_b[img\icon_music.png,inline] 曲情報 ::::::::::\n\n[half]"
+
+	//==== song_add.dic: 曲の追加・ダウンロード ====
+	_t['song.manual.title'] = ": \_b[img\icon_fopen.png,inline] 曲/m3u手動追加 ::::::::::::::::\n\n"
+	_t['song.manual.body'] = "\_b[img\icon_point.png,inline] {fcl}{fcc}\q[参照して追加,□曲を参照して追加]\n　/
+		└\q[フォルダの曲を全て追加,□フォルダを参照して追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
+		\_b[img\icon_point.png,inline] {fcl}{fcc}\q[パスを入力して追加,□曲をパス入力で追加]\n　/
+		└\q[フォルダのパスを入力して追加,□フォルダをパス入力で追加]\f[color,default]\f[cursorfontcolor,default]\n\n[half]/
+		"
+	_t['song.dialog.file_title'] = "曲/m3uを選択"
+	_t['song.dialog.file_filter'] = "音楽ファイル/m3u"
+	_t['song.dialog.all_files'] = "すべてのファイル"
+	_t['song.dialog.folder_title'] = "曲を追加するフォルダを選択"
+	_t['song.url.invalid'] = "サウンドファイルのURLを入力してください。"
+	_t['song.added'] = "{0}曲追加。\w5\n曲リストには全{1}曲入ってます。"
+	_t['song.already'] = "その曲はもう既に入っています。"
+	_t['song.none'] = "追加できる音楽ファイルがありませんでした。"
+	_t['song.dl.exists'] = "既に同じ名前のファイルがダウンロードされています。\w5\n上書きしますか？\w4"
+	_t['song.dl.move_failed'] = "{0}をsound_fileフォルダに移動できませんでした。"
+	_t['song.dl.overwritten'] = "{0}を上書きしました。"
+
+	//==== songlist.dic: 曲リストのクリア・m3u出力 ====
+	_t['songlist.clear.confirm_dl'] = "曲リスト全{0}曲をクリア、\w3ダウンロード曲全{1}曲を削除します。\w5宜しいですか？"
+	_t['songlist.clear.confirm'] = "曲リスト、\w2全{0}曲をクリアします。\n\w4宜しいですか？\w5\n[half]"
+	_t['songlist.clear.empty'] = "曲リストにはまだ何もありません。"
+	_t['songlist.clear.done'] = "クリアしました。"
+	_t['songlist.m3u.title'] = ": \_b[img\icon_m3u.png,inline] 曲リスト出力 :::::::::::::::::\n\n[half]"
+	_t['songlist.m3u.body'] = "曲リストをm3u形式で出力します。\n/
+		\n\_b[img\icon_point.png,inline] 出力先パス ［\q[変更,□出力先ディレクトリ変更]］［\q[開く,□m3uフォルダを開く]］/
+		\n{fcl}\_!{0}\_!\f[color,default]"
+	_t['songlist.m3u.export'] = "\n\n　　　　　　 ［\q[出力する,□m3uで出力]］\n"
+	_t['songlist.m3u.dialog_title'] = "曲リストの出力先"
+	_t['songlist.m3u.need_ext'] = "m3uファイルを選択するか、.m3uの付いたファイル名を入力してください。"
+	_t['songlist.m3u.exists'] = "既に同じファイル名のファイルが存在します。\w5\n上書きしますか？\w4"
+	_t['songlist.m3u.done'] = "曲リスト{fcl}”{0}”\f[color,default]を出力しました。"
+	_t['songlist.m3u.failed'] = "曲リスト出力に失敗しました。"
+
+	//==== network_event.dic: ネットワークのイベント ====
+	_t['net.sntp.done'] = "時刻を合わせました。"
+	_t['net.rss.latest'] = " 最新{0}件"
+	_t['net.created.dau'] = "{fcl}”updates2.dau”\f[color,default]を作成しました。"
+	_t['net.created.nar'] = "{0}{fcl}”{1}”\f[color,default]を作成しました。"
+
+	_t
+}
