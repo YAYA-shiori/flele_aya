@@ -547,7 +547,7 @@ if (ARRAYSIZE(○ダウンロード曲リスト))>0 {
 	□メニューヘッダ
 --
 ": %(アイコン2('info'))説明 :::::::::::::::::::::::::\n\n[half]/
-%(アイコン2('point','□'))%(fcl)midi/wave/mp3/wma/ogg/au%(def)形式の音楽ファイル、又は%(fcl)m3u%(def)形式の曲リストファイルをFLELEにドロップすると曲リストに追加されます。/
+%(アイコン2('point','□'))%(fcl)midi/wave/mp3/wma/ogg/m4a/aac/flac/opus%(def)形式の音楽ファイル、又は%(fcl)m3u%(def)形式の曲リストファイルをFLELEにドロップすると曲リストに追加されます。/
 \n[half]/
 \nウェブサイトから曲をダウンロードする場合はサウンドファイルのリンクをドロップするか、%(fcl)”URL入力ダウンロード”%(def)からURLを直接入力してください。/
 \n[half]"
@@ -607,7 +607,7 @@ i=○path
 ": %(アイコン2('fopen'))曲/m3u手動追加 ::::::::::::::::\n\n"
 --
 "%(アイコン2('point','□'))%(fcl)%(fcc)\q[参照して追加,□曲を参照して追加]\n　/
-└\q[同じフォルダにある曲全て追加,□フォルダを参照して追加]%(def)%(defc)\n\n[half]/
+└\q[フォルダの曲を全て追加,□フォルダを参照して追加]%(def)%(defc)\n\n[half]/
 %(アイコン2('point','□'))%(fcl)%(fcc)\q[パスを入力して追加,□曲をパス入力で追加]\n　/
 └\q[フォルダのパスを入力して追加,□フォルダをパス入力で追加]%(def)%(defc)\n\n[half]/
 "
@@ -625,25 +625,45 @@ i=○path
 □ヘルプメニュー消滅した
 }
 
+//ファイル・フォルダの選択はSSP本体のダイアログで行う。
+//選ぶと --id= の名前のイベントが、キャンセルすると OnSystemDialogCancel が届く（メニューは \C で出したままにする）
 □曲を参照して追加 {
-○path=0
-○path=□ファイル選択ダイアログ
-	if ○path!=0 {
-	□ファイルがドロップされた
+"\C\![open,dialog,open,--title=曲/m3uを選択,--filter=音楽ファイル/m3u|*.mid;*.mp3;*.wav;*.wma;*.ogg;*.m4a;*.aac;*.flac;*.opus;*.m3u;*.pls|すべてのファイル|*.*,--id=On_曲ファイル選択]"
+}
+
+On_曲ファイル選択 {
+if reference2 == '' {
+	return
 	}
-	else {□手動で曲を追加}
+○path = □ダイアログのパス(reference2)
+□ファイルがドロップされた
 }
 
 □フォルダを参照して追加 {
-○ディレクトリ=0
-○path=0
-○path=□ファイル選択ダイアログ
-○ディレクトリ=(SPLITPATH(○path)[0])+(SPLITPATH(○path)[1])
+"\C\![open,dialog,folder,--title=曲を追加するフォルダを選択,--id=On_曲フォルダ選択]"
+}
 
-	if ○ディレクトリ!=0 {
-	□ディレクトリドロップ処理
+On_曲フォルダ選択 {
+if reference2 == '' {
+	return
 	}
-	else {□手動で曲を追加}
+_dir = □ダイアログのパス(reference2)
+//フォルダ内のファイル名をそのまま後ろにつなぐので、末尾を \ にする
+if SUBSTR(_dir,STRLEN(_dir)-1,1) != '\' { _dir += '\' }
+○ディレクトリ = _dir
+□ディレクトリドロップ処理
+}
+
+//ダイアログの結果のパスは区切りが / で届くので、曲リストと同じ \ に戻す
+□ダイアログのパス {
+REPLACE(_argv[0],'/','\')
+}
+
+OnSystemDialogCancel {
+case reference1 {
+	when 'On_曲ファイル選択','On_曲フォルダ選択' { □手動で曲を追加 }
+	when 'On_m3u出力先選択' { □曲リスト出力 }
+	}
 }
 
 □URL入力ダウンロード {
@@ -775,11 +795,19 @@ else {
 //\![open,inputbox,m3u,-1]
 
 □出力先ディレクトリ変更 {
-_path=□ファイル選択ダイアログ
+_dir = (SPLITPATH(○m3u出力パス)[0]) + (SPLITPATH(○m3u出力パス)[1])
+_name = SPLITPATH(○m3u出力パス)[2]
+"\C\![open,dialog,save,--title=曲リストの出力先,%(□タグ引数('--dir=' + _dir)),--filter=m3u|*.m3u,--ext=m3u,%(□タグ引数('--name=' + _name)),--id=On_m3u出力先選択]"
+}
 
+On_m3u出力先選択 {
+if reference2 == '' {
+	return
+	}
+_path = □ダイアログのパス(reference2)
 _拡張子=TOLOWER((SPLITPATH(_path))[3])
 
-		if FATTRIB((SPLITPATH(_path)[0])+(SPLITPATH(_path)[1]))[2] != 1 || _path==0 {
+		if FATTRIB((SPLITPATH(_path)[0])+(SPLITPATH(_path)[1]))[2] != 1 {
 		□曲リスト出力
 		}
 		elseif _拡張子!=".m3u" {
@@ -1373,7 +1401,7 @@ if "audio" _in_ reference2 {
 
 	//　URLが音楽ファイルかどうか確認
 	_拡張子 = TOLOWER ((SPLITPATH (○URL))[3])
-	if (ASEARCH(_拡張子,'.mid','.mp3','.wav','.wma','.ogg')) != -1 {
+	if □音楽ファイルの拡張子か(_拡張子) {
 	○DL開始 = 0
 	○DL成功 = 0
 	○URL = reference0
@@ -1479,8 +1507,8 @@ OnDirectoryDrop
 □ディレクトリドロップ処理 {
 "\0\b[6]\b[-1]"
 --
-	//　ディレクトリに入ってるファイルを全て配列保存
-	○AllFilepath = FENUM (○ディレクトリ)
+	//　ディレクトリに入ってるファイルを全て配列保存（カンマを含むファイル名が割れないよう、区切りを \x01 にする）
+	○AllFilepath = SPLIT (FENUM (○ディレクトリ, CHR(1)), CHR(1))
 	--
 	□ドロップファイル処理
 --
@@ -1534,7 +1562,7 @@ OnFileDrop2 {
 foreach ○AllFilepath ; _Filename {
 	//音楽ファイルかどうか拡張子で判断
 	_拡張子 = TOLOWER ((SPLITPATH (_Filename))[3])
-	if (ASEARCH(_拡張子,'.mid','.mp3','.wav','.wma','.ogg')) != -1
+	if □音楽ファイルの拡張子か(_拡張子)
 		{
 		//ディレクトリパスが付いてなかったら付ける
 		if ○ディレクトリ != 0 {_Filename = ○ディレクトリ + _Filename}
@@ -1574,6 +1602,8 @@ else {
 	--
 	//既に入ってた曲を1つ以上ドロップされた
 	if _既に入ってた曲数 >0	{"\b[0]\s[0]その曲はもう既に入っています。\w9\w9\w9\w9%(○サーフェス)"}
+	//音楽ファイルが1つも無かった
+	else {"\b[0]\s[0]追加できる音楽ファイルがありませんでした。\w9\w9\w9\w9%(○サーフェス)"}
 	}
 //　セーブ
 SAVEVAR
@@ -1702,7 +1732,7 @@ if _m[0] != '' {
 //曲名ウィンドウ表示してたら曲名更新
 void □曲名ウィンドウONなら表示
 
-_script = "\![sound,stop]\![sound,play,%(□サウンド引数(○演奏中曲絶対パス))]"
+_script = "\![sound,stop]\![sound,play,%(□タグ引数(○演奏中曲絶対パス))]"
 //演奏していない状態だったら歌サーフェスにする
 if _開始前に止まっていた {
 	_script += "\0\b[-1]\s[25]\e"
@@ -1804,8 +1834,8 @@ else {
 	}
 }
 
-//\![sound,play,～] に渡す引数（カンマを含むパスでも1つの引数になるよう""で囲む）
-□サウンド引数 {
+//\![sound,play,～] などのタグに渡す引数（カンマを含むパスでも1つの引数になるよう""で囲む）
+□タグ引数 {
 _q = CHR(0x22)
 _q + REPLACE(_argv[0], _q, _q + _q) + _q
 }
@@ -2338,10 +2368,6 @@ if ○sender == "SSP"
 }
 
 
-//ファイル選択ダイアログを表示し選択したファイルのパスを返す
-□ファイル選択ダイアログ {
-FUNCTIONEX("saori\proxy.dll","wvt.exe","OpenDialog")
-}
 
 
 /////////////////////////////////////////////////////////////////
@@ -2369,6 +2395,11 @@ else {
 }
 
 /////////////////////////////////////////////////////////////////
+
+//曲リストに追加できる音楽ファイルの拡張子か（_argv[0] は . 付きの小文字の拡張子）
+□音楽ファイルの拡張子か {
+(ASEARCH(_argv[0],'.mid','.mp3','.wav','.wma','.ogg','.m4a','.aac','.flac','.opus')) != -1
+}
 
 絶対パス変換 {
 //相対パスなら絶対パスになおす
