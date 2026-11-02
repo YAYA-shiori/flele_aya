@@ -77,4 +77,4 @@
 - `cmd_flele.nar` `cmd_to_flele.nar` は caramelldansen 用のおまけ（リポジトリの raw から配る。nar と更新には入れない）。
 - 旧 URL（`https://raw.githubusercontent.com/YAYA-shiori/flele_aya/main/`）から更新する利用者を新しい URL へ移すため、ルートと `flele_balloon/`、`flele_balloon2/` に固定の `updates2.dau` をコミットしてある（`.gitignore` の対象なので `git add -f` で追加した）。
     - 載せているのは、新しい homeurl を運ぶファイル（ルートは `core.dic`、バルーンは `descript.txt`）と、ルートの `delete.txt` だけ。
-    - 凍結したファイルで、消さず、作り直さない。載せたファイルを変えると MD5 が合わなくなるので、`core.dic` と `delete.txt` とバルーンの `descript.txt` は、旧 URL の利用者が移り終えるまで、できるだけ触らない。
+    - これらは作り直さない。新しい URL からは `build-site.ps1` が作る更新ファイルが配られる。
