@@ -1,20 +1,48 @@
+# Files excluded when creating the .nar (gitignore syntax).
+# Used by SSP and by .github/scripts/build-site.ps1. .updateignore includes this file.
+# https://ssp.shillest.net/ukadoc/manual/descript_install.html
+
+# files for developing the ghost (not shipped in the nar or in network updates)
 WORK/
 tamac.exe
-AGENTS.md
-CLAUDE.md
-GHOST.md
-.claude/
-.github/
-.git/
-.gitignore
+/AGENTS.md
+/CLAUDE.md
+/GHOST.md
+/.claude/
+/.mcp.json
+/.agents/
+
+# files of the repository (git, editor, GitHub); the nar does not need them
+/.github/
+/.gitignore
+/.gitattributes
+/.editorconfig
+/.narignore
+/.updateignore
+
+# git metadata (ghost/master/dic/system is a plain folder in the nar, not a submodule)
+.git
 .gitmodules
-.gitattributes
-.editorconfig
-ghost/master/yaya_variable.cfg
-ghost/master/aya5_variable.cfg
-flele_balloon2/
-cmd_to_flele.nar
-cmd_flele.nar
+
+# needed only by network updates (.updateignore includes it again)
+/delete.txt
+
+# network update files
+updates2.dau
+updates.txt
+
+# runtime data
+profile/
+yaya_variable.cfg
+aya5_variable.cfg
+
+# distributed on their own, not in the nar of the ghost
+# (flele_balloon2 is a balloon with its own nar and update files: STANDALONE balloons of .github/scripts/build-site.ps1)
+/flele_balloon2/
+/cmd_to_flele.nar
+/cmd_flele.nar
+
+# files of the system dictionary repository
 /ghost/master/dic/system/.github/
 /ghost/master/dic/system/.vscode/
 /ghost/master/dic/system/.gitattributes

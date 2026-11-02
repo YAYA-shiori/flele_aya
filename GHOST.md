@@ -68,8 +68,13 @@
 
 ## 配布（GitHub Actions）
 
-- `.github/workflows/release.yml` が `main` への push のたびに `updates2.dau` / `delete.txt` を作り直し、変更があれば nar を Releases に出す。**push するとリリースが公開される**ので、`main` への push は作者の確認を取ってから行う。
-- `updates2.dau` と `delete.txt` は CI が作るので、手で編集しない。
-- `release_ghost.py` は `git ls-files --recurse-submodules` で配布物を数える。`dic/system` は submodule だが nar には普通のファイルとして入る。
-- 配布しないファイルは `.narignore`、ネットワーク更新に含めないファイルは `.updateignore`。
-- `flele_balloon/` `flele_balloon2/` は同梱バルーン。`cmd_flele.nar` `cmd_to_flele.nar` は caramelldansen 用のおまけ。
+- ネットワーク更新: `https://yaya-shiori.github.io/flele_aya/`（GitHub Pages）。`On_homeurl` は `ghost/master/dic/normal/core.dic` に書く。
+- 配布物は `.github/workflows/auto_deploy.yml` が作る。辞書チェック（`auto check`）が通った `main` / `master` の push ごとに、`.github/scripts/build-site.ps1` が nar（`.narignore` で除外）と更新ファイル一式（`.updateignore` で除外）を作って Pages に出し、nar を Releases の `latest` に置き直す。**push するとリリースが公開される**ので、`main` への push は作者の確認を取ってから行う。
+- 手元でも `pwsh ./.github/scripts/build-site.ps1 -OutDir site`（`-ListOnly` で一覧だけ）で同じものを作れる。配布物は `git ls-files --recurse-submodules` で数える。`dic/system` は submodule だが、nar にも更新にも普通のファイルとして入る。リポジトリの Settings > Pages > Source は「GitHub Actions」にしておく。
+- `updates2.dau` と `updates.txt` は作らず、コミットもしない（`.gitignore` で除外してある）。`delete.txt` は手で書く。配布しているファイル（フォルダを含む。例: `ghost/master/dic/system`）は書かない。
+- nar の固定の URL は `https://github.com/YAYA-shiori/flele_aya/releases/latest/download/flele_aya.nar` と `.../flele_balloon2.nar`。
+- `flele_balloon/` は同梱バルーン（`install.txt` の `balloon.directory`）。`flele_balloon2/` は単独で配るバルーンで、独自の `install.txt` を持つ。どちらもゴーストの nar と更新には入れず（`.narignore`、`.updateignore`）、`descript.txt` の `homeurl`（`https://yaya-shiori.github.io/flele_aya/flele_balloon/`、`.../flele_balloon2/`）から別に更新される。更新ファイルは `build-site.ps1` が作る。`flele_balloon2` は `build-site.ps1` の `-StandaloneBalloons` に書いてあり、独自の nar（`flele_balloon2.nar`）も作る。
+- `cmd_flele.nar` `cmd_to_flele.nar` は caramelldansen 用のおまけ（リポジトリの raw から配る。nar と更新には入れない）。
+- 旧 URL（`https://raw.githubusercontent.com/YAYA-shiori/flele_aya/main/`）から更新する利用者を新しい URL へ移すため、ルートと `flele_balloon/`、`flele_balloon2/` に固定の `updates2.dau` をコミットしてある（`.gitignore` の対象なので `git add -f` で追加した）。
+    - 載せているのは、新しい homeurl を運ぶファイル（ルートは `core.dic`、バルーンは `descript.txt`）と、ルートの `delete.txt` だけ。
+    - 凍結したファイルで、消さず、作り直さない。載せたファイルを変えると MD5 が合わなくなるので、`core.dic` と `delete.txt` とバルーンの `descript.txt` は、旧 URL の利用者が移り終えるまで、できるだけ触らない。

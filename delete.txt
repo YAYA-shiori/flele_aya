@@ -11,7 +11,6 @@ ghost/master/dic/normal/mouse.dic
 ghost/master/dic/normal/resource.dic
 ghost/master/dic/normal/song_window.dic
 ghost/master/dic/normal/theme.dic
-ghost/master/dic/system
 ghost/master/saori/KI.dll
 ghost/master/saori/mciaudior.dll
 ghost/master/saori/mciaudior.txt
@@ -43,3 +42,9 @@ ghost\shell\white\surface0112.png
 ghost\shell\white\surfaces.txt
 readme.txt
 readme2.txt
+.narignore
+.updateignore
+ghost/master/dic/system/.vscode/_loading_order.txt
+ghost/master/dic/system/.vscode/extensions.json
+ghost/master/dic/system/.vscode/settings.json
+ghost/master/dic/system/.vscode/yayalint_config.lua

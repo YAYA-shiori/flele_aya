@@ -1,21 +1,11 @@
-WORK/
-tamac.exe
-AGENTS.md
-CLAUDE.md
-GHOST.md
-.claude/
-.github/
-.git/
-.gitignore
-.gitmodules
-.gitattributes
-.editorconfig
-ghost/master/yaya_variable.cfg
-ghost/master/aya5_variable.cfg
-flele_balloon/
-flele_balloon2/
-cmd_to_flele.nar
-cmd_flele.nar
-/ghost/master/dic/system/.github/
-/ghost/master/dic/system/.vscode/
-/ghost/master/dic/system/.gitattributes
+# Files excluded when creating network update files (updates2.dau), gitignore syntax.
+# Starts from the .narignore rules; later lines can add or re-include files.
+include:.narignore
+
+# delete.txt is needed by network updates
+!/delete.txt
+
+# The balloon that comes with the nar is installed to balloon/ by SSP; a network update would only
+# put its files into a folder inside the ghost folder. It has its own update files (homeurl in its
+# descript.txt), which .github/scripts/build-site.ps1 makes from install.txt.
+/flele_balloon/
