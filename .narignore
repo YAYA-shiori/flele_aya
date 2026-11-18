@@ -20,6 +20,9 @@ tamac.exe
 /.narignore
 /.updateignore
 
+# metainfo for web apps (read from raw.githubusercontent.com; not shipped in the nar or in network updates)
+/.ukagaka/
+
 # git metadata (ghost/master/dic/system is a plain folder in the nar, not a submodule)
 .git
 .gitmodules
