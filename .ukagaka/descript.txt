@@ -1,0 +1,10 @@
+//meta info
+type,ghost
+name,FLELE
+uuid,0ZB6hgG/+XYOhZ++AxOvig==
+sakura.name,flele
+has_terms,0
+craftman,FLELE原作+YAYA開発PJ
+craftmanurl,https://github.com/YAYA-shiori/flele_aya
+languages,ja,en
+homeurl,https://yaya-shiori.github.io/flele_aya/

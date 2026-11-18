@@ -15,3 +15,5 @@ info.distributionurl,https://github.com/YAYA-shiori/flele_aya
 info.narurl,https://github.com/YAYA-shiori/flele_aya/releases/latest/download/flele_aya.nar
 readme,README.md
 readme.charset,UTF-8
+metainfo,https://raw.githubusercontent.com/YAYA-shiori/flele_aya/main/.ukagaka/
+githubrepo,https://github.com/YAYA-shiori/flele_aya
